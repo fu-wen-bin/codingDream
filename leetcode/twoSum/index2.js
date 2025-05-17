@@ -12,7 +12,7 @@ let nums = [2, 7, 11, 15], target = 9
 //   }
 // }
 
-var twoSum = function (nums, target) {
+let twoSum = function (nums, target) {
   // 用空间换时间
   // 本写法相当于使用哈希表，只是用了手搓的办法
   let diffs = {}
