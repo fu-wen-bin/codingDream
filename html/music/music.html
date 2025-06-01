@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>音乐</title>
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4937691_pggab0izh2.css">
+  <link rel="stylesheet" href="/css/music.css">
+</head>
+<body>
+  <div class="music">
+
+    <div class="header">
+      <div class="back">
+        <i class="iconfont icon-zuojiantou"></i>
+      </div>
+      <div class="title">
+        <p class="name">星空</p>
+        <p class="author">周杰伦</p>
+      </div>
+      <div class="more">
+        <i class="iconfont icon-gengduo"></i>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="cover">
+        <img src="/images/album.png" alt="专辑封面">
+      </div>
+      <div class="title">
+        <p class="name">星空</p>
+        <p class="author">周杰伦 - 魔杰座</p>
+      </div>
+      <div class="time">
+        <p class="current">2:15</p>
+        <p class="total">4:30</p>
+      </div>
+      <div class="bar">
+        <div class="pointer"></div>
+      </div>
+      <div class="control">
+        <div class="previous">
+          <i class="iconfont icon-shangyishou"></i>
+        </div>
+        <div class="pause">
+          <i class="iconfont icon-zanting"></i>
+        </div>
+        <div class="next">
+          <i class="iconfont icon-xiayishou"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <div class="lilcover">
+        <img src="/images/album.png" class="cover" alt="专辑封面">
+      </div>
+      <div class="title">
+        <p class="name">星空</p>
+        <p class="author">周杰伦</p>
+      </div>
+      <div class="operate">
+        <div class="like">
+          <i class="iconfont icon-woxihuanjihuo"> </i>
+        </div>
+        <div class="playlist">
+          <i class="iconfont icon-liebiao"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const like = document.querySelector('.like')
+    like.addEventListener('click', () => {
+      const icon = like.querySelector('i')
+      if (icon.classList.contains('icon-woxihuanjihuo')) {
+        icon.classList.remove('icon-woxihuanjihuo')
+        icon.classList.add('icon-woxihuan')
+      } else {
+        icon.classList.remove('icon-woxihuan')
+        icon.classList.add('icon-woxihuanjihuo')
+      }
+    })
+  </script>
+</body>
+</html>

@@ -1,0 +1,169 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.music {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.body {
+  flex: 1;
+  background-color: #252525;
+  color: white;
+  padding: 0 32px;
+}
+
+.name {
+  margin-bottom: 4px;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.author {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.header, .footer {
+  display: flex;
+  height: 76px;
+  background-color: #161616;
+  color: white;
+  padding: 0 16px;
+  align-items: center;
+
+}
+
+.body .cover {
+  margin-top: 20px;
+}
+
+.body .cover img {
+  width: 100%;
+}
+
+.back, .more, .playlist, .like, .previous, .pause, .next {
+  display: flex;
+  width: 40px;
+  height: 40px;
+  background-color: #2E2E2E;
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+}
+
+.pause {
+  width: 60px;
+  height: 60px;
+  margin: 0 32px;
+  background-color: #fff;
+}
+
+.icon-zanting {
+  color: #D9CFF9;
+  font-size: 28px;
+}
+
+.title, .time {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.header .title {
+  align-items: center;
+}
+
+.time {
+  display: flex;
+  flex-direction: row;
+  margin-top: 32px;
+}
+
+.time .total {
+  margin-left: auto;
+}
+
+.bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 15px 0 30px 0;
+  height: 8px;
+  border-radius: 8px;
+  background-color: #E6E6E6;
+}
+
+.pointer {
+  background-color: #fff;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.control {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer .title {
+  margin-left: 16px;
+}
+
+.footer .title .name {
+  font-size: 14px;
+}
+
+.footer .title.author {
+  font-size: 12px;
+}
+
+.body .title .name {
+  margin-bottom: 8px;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.body .title .author {
+  font-size: 14px;
+  line-height: 21px;
+}
+
+.icon-gengduo {
+  font-size: 20px;
+}
+
+.footer {
+  display: flex;
+  height: 72px;
+}
+
+img {
+  border-radius: 8%;
+}
+
+.lilcover .cover {
+  width: 48px;
+}
+
+.icon-woxihuanjihuo {
+  color: red;
+}
+
+.operate {
+  display: flex;
+  width: 96px;
+}
+
+.operate .iconfont {
+  font-size: 18px;
+}
+
+.operate .playlist {
+  margin-left: auto;
+}
