@@ -151,10 +151,6 @@ img {
   width: 48px;
 }
 
-.icon-woxihuanjihuo {
-  color: red;
-}
-
 .operate {
   display: flex;
   width: 96px;
@@ -166,4 +162,9 @@ img {
 
 .operate .playlist {
   margin-left: auto;
+}
+
+
+.icon-woxihuanjihuo {
+  color: red;
 }
