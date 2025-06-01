@@ -38,6 +38,10 @@
 
 }
 
+.body .title {
+  margin-top: 32px;
+}
+
 .body .cover {
   margin-top: 20px;
 }
@@ -63,8 +67,8 @@
   background-color: #fff;
 }
 
-.icon-zanting {
-  color: #D9CFF9;
+.icon-zanting, .icon-bofang {
+  color: #DFCFFF;
   font-size: 28px;
 }
 
@@ -117,6 +121,7 @@
 
 .footer .title .name {
   font-size: 14px;
+  margin-bottom: 0;
 }
 
 .footer .title.author {
@@ -135,7 +140,7 @@
 }
 
 .icon-gengduo {
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .footer {

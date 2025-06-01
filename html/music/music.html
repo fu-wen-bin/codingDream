@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>音乐</title>
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4937691_pggab0izh2.css">
+  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_4937691_ya708cgih4p.css">
   <link rel="stylesheet" href="/css/music.css">
 </head>
 <body>
@@ -72,6 +72,7 @@
 
   <script>
     const like = document.querySelector('.like')
+    const play = document.querySelector('.pause')
     like.addEventListener('click', () => {
       const icon = like.querySelector('i')
       if (icon.classList.contains('icon-woxihuanjihuo')) {
@@ -80,6 +81,17 @@
       } else {
         icon.classList.remove('icon-woxihuan')
         icon.classList.add('icon-woxihuanjihuo')
+      }
+    })
+
+    play.addEventListener('click', () => {
+      const icon = play.querySelector('i')
+      if (icon.classList.contains('icon-zanting')) {
+        icon.classList.remove('icon-zanting')
+        icon.classList.add('icon-bofang')
+      } else {
+        icon.classList.remove('icon-bofang')
+        icon.classList.add('icon-zanting')
       }
     })
   </script>
