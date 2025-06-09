@@ -19,4 +19,4 @@ var dailyTemperatures = function (temperatures) {
   return res // 返回结果数组
 }
 
-console.log(dailyTemperatures(temperatures)) // [1, 1, 4, 2, 1, 1, 0, 0]
+console.log(dailyTemperatures(temperatures)) // [1, 1, 4.js, 2, 1, 1, 0, 0]

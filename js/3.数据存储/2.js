@@ -31,7 +31,7 @@ console.log(FWB['school'])
 // 3. 修改对象  --对象名.属性名 = 新值   --属性已存在则为修改，不存在则为新增属性
 FWB.age = 20
 
-// 4. 删除对象  --delete
+// 4.js. 删除对象  --delete
 delete FWB.age
 console.log(FWB)
 

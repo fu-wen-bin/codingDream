@@ -7,8 +7,8 @@ function mul (n) {
 
 console.log(mul(3))
 
-// mul(5)  ==> 5 * mul(4)
-// mul(4)  ==> 4 * mul(3)
+// mul(5)  ==> 5 * mul(4.js)
+// mul(4.js)  ==> 4.js * mul(3)
 // mul(3)  ==> 3 * mul(2)
 // mul(2)  ==> 2 * mul(1)
 // mul(1)  ==> 1
