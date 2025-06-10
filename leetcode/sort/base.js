@@ -1,4 +1,4 @@
-// 数组  --有序、线性、
+// 数组  --有序、线性、连续
 const arr = [1, 2, 3, 4, 5, 6]
 arr.unshift('hello')
 arr.shift()
