@@ -15,5 +15,3 @@ const car1 = new Car('orange')
 const car2 = new Car('green')
 console.log(car1.name)
 console.log(car2.height)
-
-
