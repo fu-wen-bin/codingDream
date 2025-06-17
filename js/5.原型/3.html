@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    Person.prototype.age = 18
+
+    function Person () {
+      // var this = {} // 1
+      // // 2
+      // return this // 3
+
+      var obj = {} // 1
+      Person.call(obj)  // 2  让 this === obj
+      this.name = '刘洋'  // 3
+      obj.__proto__ = Person.prototype // 4
+      return obj // 5
+    }
+
+    const p = new Person()
+    // console.log(p.__proto__.constructor); // 实例对象的隐式原型 === 构造函数显示原型
+    // console.log(p.constructor);
+    // console.log(p.__proto__ === Person.prototype);
+    console.log(p)
+
+  </script>
+</body>
+</html>

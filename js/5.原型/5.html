@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Title</title>
+</head>
+<body>
+  <script>
+    function GrandParent() {
+      this.name = 'grandparent'
+      // this.card = 'visa'
+    }
+
+    Parent.prototype = new GrandParent()  // {name: 'grandparent', card: 'visa'}.__proto__ === GrandParent.prototype.__propto__ === Object.prototype.__proto__  == null
+    function Parent() {
+      this.lastName = '张'
+    }
+
+    Child.prototype = new Parent()  // {lastName: '张'}.__proto__ === {name: 'grandparent', card: 'visa'}
+    function Child() {
+      this.name = '张三'
+      this.age = 18
+    }
+
+    const c = new Child()
+
+    // console.log(c.lastName) // 张
+    console.log(c.card)  // visa
+
+
+  </script>
+</body>
+</html>
