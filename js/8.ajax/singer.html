@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>singer</title>
+</head>
+<body>
+  <button id="btn">获取歌手信息</button>
+  <div id="app"></div>
+  <ul id="list"></ul>
+
+  <script>
+    let btn = document.getElementById('btn')
+    let rowData = [] // 用于存储获取到的数据
+    btn.addEventListener('click', () => {
+      // 获取数据
+      getData().then(() => {
+        renderList(rowData) // 调用渲染函数
+      })
+    })
+
+    function getData () {
+      return new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest() // 创建异步对象
+        xhr.open('GET', 'https://mock.mengxuegu.com/mock/66585c4db462b81cb3916d3e/songer/songer') // 准备请求的参数
+        xhr.send() // 发送请求
+        // 监测请求发送的结果
+        xhr.onreadystatechange = function () {
+
+          // 判断请求是否完成
+          if (xhr.readyState === 4 && xhr.status === 200) {
+            // 请求成功
+            // console.log(xhr.responseText)
+            // 处理数据，将据转换为JSON对象
+            let data = JSON.parse(xhr.responseText)
+            rowData = data.data // 获取数据中的data属性  --但如果这样写，先执行同步，渲染数据为空
+            console.log(data.data) // 打印数据
+            resolve()
+          }
+
+        }
+      })
+    }
+
+    function renderList (data) {
+      let list = document.getElementById('list')
+      for (let i = 0; i < data.length; i++) {
+        let item = data[i]
+        let li = document.createElement('li')
+        li.innerHTML = `${item.name}--${item.songsCount}`
+        list.appendChild(li)
+      }
+    }
+
+
+  </script>
+</body>
+</html>
