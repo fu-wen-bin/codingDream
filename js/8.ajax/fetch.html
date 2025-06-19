@@ -3,51 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>fetch</title>
+  <title>Document</title>
 </head>
 <body>
   <button id="btn">获取数据</button>
-  <div>
-    <!--登录-->
-    <div class="login">
-      <h2>登录</h2>
-      <form id="loginForm">
-        <label for="username">用户名:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">密码:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit">登录</button>
-      </form>
-    </div>
-  </div>
 
   <script>
-    let loginForm = document.querySelector('#loginForm')
-
-    loginForm.addEventListener('submit', (event) => {
-      // 阻止表单默认提交行为
-      event.preventDefault()
-
-      let username = document.querySelector('#username').value
-      let password = document.querySelector('#password').value
-
-      // 使用正确的服务器地址
-      fetch(`http://192.168.24.35:3000/login?username=${username}&password=${password}`, {
-        method: 'GET',
-      }).then(response => {
-        if (!response.ok) {
-          throw new Error('网络响应不OK')
-        }
-        return response.text() // 使用text()而不是json()，因为服务器返回的是文本
-      }).then(data => {
-        console.log(data) // 打印获取到的数据
-        alert('登录成功！')
-        // 如果需要跳转，可以在这里添加
-        // window.location.href = '跳转目标页面'
-      }).catch(error => {
-        console.error('登录失败:', error)
+    let btn = document.getElementById('btn')
+    btn.addEventListener('click', () => {
+      fetch('https://mock.mengxuegu.com/mock/66585c4db462b81cb3916d3e/songer/songer?page=1', {
+        method: 'GET'
+      }).then((response) => {
+        return response.json()
+      }).then((data) => {
+        console.log(data);
       })
     })
   </script>
