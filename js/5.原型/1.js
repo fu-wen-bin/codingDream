@@ -3,7 +3,7 @@ Car.prototype.height = 1.4
 Car.prototype.weight = 1.5
 Car.prototype.long = 4800
 
-function Car(color) {
+function Car (color) {
   // this.name = 'su7-Ultra'
   // this.height = 1.4
   // this.weight = 1.5
