@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>行政能力测试 - 数量关系训练</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧮 数量关系训练系统</h1>
+            <p>提升你的速算能力，轻松应对行政能力测试</p>
+        </header>
+
+        <main>
+            <!-- 开始界面 -->
+            <div id="start-screen" class="screen active">
+                <div class="welcome-card">
+
+                    <!-- 功能特性介绍 -->
+                    <div class="features-section">
+                        <h3>✨ 核心功能</h3>
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">🤖</div>
+                                <div class="feature-content">
+                                    <h4>AI智能出题</h4>
+                                    <p>使用Qwen AI生成高质量题目，确保多样性和合理性</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📈</div>
+                                <div class="feature-content">
+                                    <h4>自适应难度</h4>
+                                    <p>根据答题进度智能调整难度，从简单到复杂循序渐进</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">⚡</div>
+                                <div class="feature-content">
+                                    <h4>实时反馈</h4>
+                                    <p>即时显示答题结果和正确率，帮助发现和改进薄弱环节</p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">📊</div>
+                                <div class="feature-content">
+                                    <h4>详细统计</h4>
+                                    <p>完整记录答题时间、正确率等数据，全面评估训练效果</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 训练说明 -->
+                    <div class="training-info">
+                        <h3>🎯 训练说明</h3>
+                        <div class="info-list">
+                            <div class="info-item">
+                                <span class="info-number">1</span>
+                                <span class="info-text">系统将自动生成50道数学运算题目</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-number">2</span>
+                                <span class="info-text">包含加减乘除四种运算类型</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-number">3</span>
+                                <span class="info-text">答错可查看正确答案，助力学习提升</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-number">4</span>
+                                <span class="info-text">完成后可查看详细的成绩报告</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 运算类型选择 -->
+                    <div class="operation-selection">
+                        <h3>🔢 选择运算类型</h3>
+                        <div class="operation-buttons">
+                            <button class="operation-btn" data-operation="+">
+                                <div class="operation-icon">➕</div>
+                                <div class="operation-name">加法</div>
+                            </button>
+                            <button class="operation-btn" data-operation="-">
+                                <div class="operation-icon">➖</div>
+                                <div class="operation-name">减法</div>
+                            </button>
+                            <button class="operation-btn" data-operation="*">
+                                <div class="operation-icon">✖️</div>
+                                <div class="operation-name">乘法</div>
+                            </button>
+                            <button class="operation-btn" data-operation="/">
+                                <div class="operation-icon">➗</div>
+                                <div class="operation-name">除法</div>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 位数选择 -->
+                    <div class="digit-selection" style="display: none;">
+                        <h3>📏 选择数字位数</h3>
+                        <div class="digit-buttons">
+                            <button class="digit-btn" data-digits="1">
+                                <div class="digit-range">1位数</div>
+                                <div class="digit-example">例：5 + 3</div>
+                            </button>
+                            <button class="digit-btn" data-digits="2">
+                                <div class="digit-range">2位数</div>
+                                <div class="digit-example">例：25 + 18</div>
+                            </button>
+                            <button class="digit-btn" data-digits="3">
+                                <div class="digit-range">3位数</div>
+                                <div class="digit-example">例：125 + 238</div>
+                            </button>
+                            <button class="digit-btn" data-digits="4">
+                                <div class="digit-range">4位数</div>
+                                <div class="digit-example">例：1250 + 2380</div>
+                            </button>
+                        </div>
+                        <button id="back-to-operation" class="btn btn-outline">返回选择运算</button>
+                    </div>
+
+                    <div id="preparation-status" class="preparation-status" style="display: none;">
+                        <div class="preparation-text">正在准备题目...</div>
+                        <div class="preparation-progress">
+                            <div class="progress-bar">
+                                <div id="progress-fill" class="progress-fill"></div>
+                            </div>
+                            <span id="progress-text">0/20</span>
+                        </div>
+                    </div>
+                    <div class="start-button-container" style="display: none;">
+                        <button id="start-btn" class="btn btn-primary">开始训练</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 训练界面 -->
+            <div id="training-screen" class="screen">
+                <div class="training-header">
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="label">题目编号</span>
+                            <span id="question-number" class="value">1</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">正确率</span>
+                            <span id="accuracy" class="value">0%</span>
+                        </div>
+                        <div class="stat">
+                            <span class="label">用时</span>
+                            <span id="timer" class="value">00:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="question-card">
+                    <div id="loading" class="loading">正在生成题目...</div>
+                    <div id="question-content" class="question-content" style="display: none;">
+                        <h3 id="question-text">题目加载中...</h3>
+                        <div class="answer-section">
+                            <input type="number" id="answer-input" placeholder="请输入答案" autocomplete="off">
+                            <button id="submit-btn" class="btn btn-secondary">提交答案</button>
+                        </div>
+                        <div id="feedback" class="feedback"></div>
+                        <div class="show-answer-section" style="display: none;">
+                            <button id="show-answer-btn" class="btn btn-outline">显示答案</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="next-btn" class="btn btn-secondary" disabled>下一题</button>
+                    <button id="exit-btn" class="btn btn-outline">退出训练</button>
+                </div>
+            </div>
+
+            <!-- 结果界面 -->
+            <div id="result-screen" class="screen">
+                <div class="result-card">
+                    <h2>训练完成！</h2>
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <span class="label">总题数</span>
+                            <span id="total-questions" class="value">0</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="label">正确数</span>
+                            <span id="correct-answers" class="value">0</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="label">正确率</span>
+                            <span id="final-accuracy" class="value">0%</span>
+                        </div>
+                        <div class="result-stat">
+                            <span class="label">总用时</span>
+                            <span id="total-time" class="value">00:00</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="restart-btn" class="btn btn-primary">重新开始</button>
+                        <button id="back-home-btn" class="btn btn-outline">返回首页</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-content">
+                <p>&copy; 2025 数量关系训练系统 - 助力公考成功</p>
+                <div class="footer-actions">
+                    <a href="#" id="footer-readme-link" class="footer-link">📖 使用说明</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 隐藏的README容器 -->
+    <div id="readme-overlay" class="readme-overlay" style="display: none;">
+        <div id="readme-container" class="readme-container">
+            <!-- README内容将在这里动态生成 -->
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

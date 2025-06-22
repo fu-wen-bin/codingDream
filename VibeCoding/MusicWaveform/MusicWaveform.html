@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>音乐可视化器 - VibeCoding</title>
+    <link rel="stylesheet" href="MusicWaveform.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 音乐可视化器</h1>
+            <p>基于 Web Audio API 的实时音频可视化</p>
+        </header>
+
+        <div class="controls">
+            <div class="audio-source">
+                <div class="file-upload">
+                    <input type="file" id="audioFile" accept="audio/*" />
+                    <label for="audioFile" class="upload-btn">
+                        <span>📁 选择音频文件</span>
+                    </label>
+                </div>
+                
+                <div class="built-in-music">
+                    <label for="builtInMusic">🎵 内置音乐:</label>
+                    <select id="builtInMusic">
+                        <option value="">选择内置音乐</option>
+                        <option value="electronic">🎹 电子音乐</option>
+                        <option value="ambient">🌊 环境音乐</option>
+                        <option value="drum">🥁 鼓点节拍</option>
+                        <option value="melody">🎼 旋律音乐</option>
+                        <option value="bass">🎸 低音音乐</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="player-controls">
+                <button id="playBtn" class="control-btn" disabled>
+                    <span class="play-icon">▶️</span>
+                    <span class="pause-icon" style="display: none;">⏸️</span>
+                </button>
+                <button id="stopBtn" class="control-btn" disabled>⏹️</button>
+                <div class="volume-control">
+                    <label for="volume">🔊</label>
+                    <input type="range" id="volume" min="0" max="100" value="50">
+                </div>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                    <div class="progress-handle" id="progressHandle"></div>
+                </div>
+                <div class="time-info">
+                    <span class="current-time">00:00</span>
+                    <span class="total-time">00:00</span>
+                </div>
+            </div>
+
+            <div class="visualizer-controls">
+                <label for="visualizerType">可视化类型:</label>
+                <select id="visualizerType">
+                    <option value="bars">频谱条形图</option>
+                    <option value="wave">波形图</option>
+                    <option value="circle">圆形频谱</option>
+                    <option value="particles">粒子效果</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="visualizer-container">
+            <canvas id="visualizer"></canvas>
+            <div class="audio-info">
+                <div id="songTitle">未选择音频文件</div>
+                <div id="timeDisplay">00:00 / 00:00</div>
+            </div>
+        </div>
+
+        <div class="settings">
+            <div class="setting-group">
+                <label for="sensitivity">灵敏度:</label>
+                <input type="range" id="sensitivity" min="1" max="10" value="5">
+            </div>
+            <div class="setting-group">
+                <label for="smoothing">平滑度:</label>
+                <input type="range" id="smoothing" min="0" max="1" step="0.1" value="0.8">
+            </div>
+            <div class="setting-group">
+                <label for="playbackRate">⚡ 播放倍速:</label>
+                <select id="playbackRate">
+                    <option value="0.25">0.25x</option>
+                    <option value="0.5">0.5x</option>
+                    <option value="0.75">0.75x</option>
+                    <option value="1" selected>1.0x</option>
+                    <option value="1.25">1.25x</option>
+                    <option value="1.5">1.5x</option>
+                    <option value="1.75">1.75x</option>
+                    <option value="2">2.0x</option>
+                </select>
+            </div>
+            <div class="setting-group">
+                <label for="colorScheme">配色方案:</label>
+                <select id="colorScheme">
+                    <option value="rainbow">彩虹</option>
+                    <option value="blue">蓝色</option>
+                    <option value="red">红色</option>
+                    <option value="green">绿色</option>
+                    <option value="purple">紫色</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script src="MusicWaveform.js"></script>
+</body>
+</html>

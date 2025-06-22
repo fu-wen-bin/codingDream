@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎨 智能简历生成器 - 打造专业简历</title>
+    <link rel="stylesheet" href="job.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"
+        integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <div class="background-animation"></div>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <i class="fas fa-file-alt"></i>
+                <h1>智能简历生成器</h1>
+            </div>
+            <div class="actions">
+                <div class="theme-selector-wrapper">
+                    <i class="fas fa-palette"></i>
+                    <select id="theme-selector">
+                        <option value="classic">🎯 经典商务</option>
+                        <option value="modern">✨ 现代简约</option>
+                        <option value="creative">🎨 创意设计</option>
+                        <option value="professional">💼 专业精英</option>
+                        <option value="tech">💻 科技风格</option>
+                        <option value="elegant">🌸 优雅风格</option>
+                        <option value="dark">🌙 暗黑主题</option>
+                        <option value="gradient">🌈 渐变炫彩</option>
+                        <option value="minimal">📝 极简主义</option>
+                        <option value="vintage">📜 复古风格</option>
+                    </select>
+                </div>
+                <button id="export-pdf" class="export-btn">
+                    <i class="fas fa-download"></i>
+                    <span>导出PDF</span>
+                </button>
+                <button id="save-template" class="save-btn">
+                    <i class="fas fa-save"></i>
+                    <span>保存模板</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="editor">
+            <div class="editor-header">
+                <h2><i class="fas fa-edit"></i> 编辑简历信息</h2>
+                <div class="progress-indicator">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="form-progress"></div>
+                    </div>
+                    <span class="progress-text">完成度: <span id="progress-percentage">0%</span></span>
+                </div>
+            </div>
+
+            <div class="form-section active" data-section="personal">
+                <div class="section-header">
+                    <h3><i class="fas fa-user"></i> 个人信息</h3>
+                    <div class="section-actions">
+                        <button type="button" class="clear-section-btn" onclick="clearPersonalInfo()" title="清空个人信息">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <div class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fullname"><i class="fas fa-user"></i> 姓名</label>
+                            <input type="text" id="fullname" placeholder="输入您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="title"><i class="fas fa-briefcase"></i> 职位头衔</label>
+                            <input type="text" id="title" placeholder="如：前端开发工程师">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> 邮箱</label>
+                            <input type="email" id="email" placeholder="邮箱地址">
+                        </div>
+                        <div class="form-group">
+                            <label for="phone"><i class="fas fa-phone"></i> 电话</label>
+                            <input type="tel" id="phone" placeholder="联系电话">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="location"><i class="fas fa-map-marker-alt"></i> 所在地</label>
+                            <input type="text" id="location" placeholder="城市，省份">
+                        </div>
+                        <div class="form-group">
+                            <label for="website"><i class="fas fa-globe"></i> 个人网站</label>
+                            <input type="url" id="website" placeholder="个人网站或作品集链接">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="summary"><i class="fas fa-quote-left"></i> 个人简介</label>
+                        <div class="summary-input-wrapper">
+                            <textarea id="summary" placeholder="简要介绍自己的专业背景、技能特长和职业目标..."></textarea>
+                            <button type="button" id="ai-polish-btn" class="ai-polish-btn" title="AI润色">
+                                <i class="fas fa-magic" style="display:block"></i>
+                                <div>AI润色</div>
+                            </button>
+                        </div>
+                        <div class="char-counter">
+                            <span id="summary-count">0</span>/500 字符
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" data-section="education">
+                <div class="section-header">
+                    <h3><i class="fas fa-graduation-cap"></i> 教育经历</h3>
+                    <div class="section-actions">
+                        <button type="button" class="clear-section-btn" onclick="clearEducation()" title="清空教育经历">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <div class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div id="education-container">
+                        <div class="education-item">
+                            <div class="item-header">
+                                <h4><i class="fas fa-university"></i> 教育经历 #1</h4>
+                                <button type="button" class="remove-item-btn" style="display: none;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-school"></i> 学校名称</label>
+                                    <input type="text" class="school-name" placeholder="大学/学院名称">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-certificate"></i> 学历</label>
+                                    <select class="degree">
+                                        <option value="">选择学历</option>
+                                        <option value="高中">高中</option>
+                                        <option value="专科">专科</option>
+                                        <option value="本科">本科</option>
+                                        <option value="硕士">硕士</option>
+                                        <option value="博士">博士</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-book"></i> 专业</label>
+                                    <input type="text" class="major" placeholder="所学专业">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-star"></i> GPA/成绩</label>
+                                    <input type="text" class="gpa" placeholder="如：3.8/4.0 或 优秀">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-alt"></i> 开始时间</label>
+                                    <input type="month" class="start-date">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-check"></i> 结束时间</label>
+                                    <input type="month" class="end-date">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-trophy"></i> 主要成就/课程</label>
+                                <div class="summary-input-wrapper">
+                                    <textarea class="achievements" placeholder="相关课程、获奖情况、学术成就等..."></textarea>
+                                    <button type="button" class="ai-polish-btn education-polish-btn" title="AI润色">
+                                        <i class="fas fa-magic" style="display:block"></i>
+                                        <div>AI润色</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-education" class="add-button">
+                        <i class="fas fa-plus"></i> 添加教育经历
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-section" data-section="experience">
+                <div class="section-header">
+                    <h3><i class="fas fa-briefcase"></i> 工作经验</h3>
+                    <div class="section-actions">
+                        <button type="button" class="clear-section-btn" onclick="clearExperience()" title="清空工作经验">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <div class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div id="experience-container">
+                        <div class="experience-item">
+                            <div class="item-header">
+                                <h4><i class="fas fa-building"></i> 工作经验 #1</h4>
+                                <button type="button" class="remove-item-btn" style="display: none;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-building"></i> 公司名称</label>
+                                    <input type="text" class="company-name" placeholder="公司/单位名称">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-user-tie"></i> 职位</label>
+                                    <input type="text" class="position" placeholder="担任职位">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-alt"></i> 开始时间</label>
+                                    <input type="month" class="start-date">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-check"></i> 结束时间</label>
+                                    <input type="month" class="end-date">
+                                    <div class="current-job">
+                                        <input type="checkbox" class="current-position" id="current-1">
+                                        <label for="current-1">目前在职</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-tasks"></i> 工作描述</label>
+                                <div class="summary-input-wrapper">
+                                    <textarea class="description" placeholder="描述您的主要职责、工作成果和技能运用..."></textarea>
+                                    <button type="button" class="ai-polish-btn experience-polish-btn" title="AI润色">
+                                        <i class="fas fa-magic" style="display:block"></i>
+                                        <div>AI润色</div>
+                                    </button>
+                                </div>
+                                <div class="char-counter">
+                                    <span class="desc-count">0</span>/1000 字符
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-experience" class="add-button">
+                        <i class="fas fa-plus"></i> 添加工作经验
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-section" data-section="skills">
+                <div class="section-header">
+                    <h3><i class="fas fa-cogs"></i> 专业技能</h3>
+                    <div class="section-actions">
+                        <button type="button" class="clear-section-btn" onclick="clearSkills()" title="清空专业技能">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <div class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="skills-categories">
+                        <div class="skill-category">
+                            <label><i class="fas fa-code"></i> 编程语言</label>
+                            <div class="summary-input-wrapper">
+                                <textarea id="programming-skills"
+                                    placeholder="如：JavaScript, Python, Java, C++..."></textarea>
+                                <button type="button" class="ai-polish-btn skills-polish-btn" data-skill-type="programming" title="AI润色">
+                                    <i class="fas fa-magic" style="display:block"></i>
+                                    <div>AI润色</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <label><i class="fas fa-tools"></i> 框架/工具</label>
+                            <div class="summary-input-wrapper">
+                                <textarea id="framework-skills" placeholder="如：React, Vue, Node.js, Docker..."></textarea>
+                                <button type="button" class="ai-polish-btn skills-polish-btn" data-skill-type="framework" title="AI润色">
+                                    <i class="fas fa-magic" style="display:block"></i>
+                                    <div>AI润色</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <label><i class="fas fa-language"></i> 语言能力</label>
+                            <div class="summary-input-wrapper">
+                                <textarea id="language-skills" placeholder="如：英语(流利), 日语(初级)..."></textarea>
+                                <button type="button" class="ai-polish-btn skills-polish-btn" data-skill-type="language" title="AI润色">
+                                    <i class="fas fa-magic" style="display:block"></i>
+                                    <div>AI润色</div>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="skill-category">
+                            <label><i class="fas fa-lightbulb"></i> 其他技能</label>
+                            <div class="summary-input-wrapper">
+                                <textarea id="other-skills" placeholder="如：项目管理, 团队协作, 数据分析..."></textarea>
+                                <button type="button" class="ai-polish-btn skills-polish-btn" data-skill-type="other" title="AI润色">
+                                    <i class="fas fa-magic" style="display:block"></i>
+                                    <div>AI润色</div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section" data-section="projects">
+                <div class="section-header">
+                    <h3><i class="fas fa-project-diagram"></i> 项目经验</h3>
+                    <div class="section-actions">
+                        <button type="button" class="clear-section-btn" onclick="clearProjects()" title="清空项目经验">
+                            <i class="fas fa-eraser"></i>
+                        </button>
+                        <div class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div id="projects-container">
+                        <div class="project-item">
+                            <div class="item-header">
+                                <h4><i class="fas fa-rocket"></i> 项目经验 #1</h4>
+                                <button type="button" class="remove-item-btn" style="display: none;">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-tag"></i> 项目名称</label>
+                                    <input type="text" class="project-name" placeholder="项目名称">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-link"></i> 项目链接</label>
+                                    <input type="url" class="project-url" placeholder="项目演示或代码链接">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-alt"></i> 开始时间</label>
+                                    <input type="month" class="project-start">
+                                </div>
+                                <div class="form-group">
+                                    <label><i class="fas fa-calendar-check"></i> 结束时间</label>
+                                    <input type="month" class="project-end">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-code"></i> 技术栈</label>
+                                <input type="text" class="project-tech" placeholder="使用的技术和工具">
+                            </div>
+                            <div class="form-group">
+                                <label><i class="fas fa-info-circle"></i> 项目描述</label>
+                                <div class="summary-input-wrapper">
+                                    <textarea class="project-description" placeholder="项目背景、主要功能、个人贡献和成果..."></textarea>
+                                    <button type="button" class="ai-polish-btn project-polish-btn" title="AI润色">
+                                        <i class="fas fa-magic" style="display:block"></i>
+                                        <div>AI润色</div>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-project" class="add-button">
+                        <i class="fas fa-plus"></i> 添加项目经验
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section class="preview" id="resume-preview">
+            <div class="preview-header">
+                <h2><i class="fas fa-eye"></i> 简历预览</h2>
+                <div class="preview-actions">
+                    <button id="fullscreen-preview" class="preview-btn">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                    <button id="print-preview" class="preview-btn">
+                        <i class="fas fa-print"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="resume-content">
+                <div class="resume-header">
+                    <div class="header-main">
+                        <h1 id="preview-name">您的姓名</h1>
+                        <p id="preview-title" class="job-title">职位头衔</p>
+                    </div>
+                    <div class="contact-info">
+                        <div class="contact-item" id="preview-email-container">
+                            <i class="fas fa-envelope"></i>
+                            <span id="preview-email">邮箱地址</span>
+                        </div>
+                        <div class="contact-item" id="preview-phone-container">
+                            <i class="fas fa-phone"></i>
+                            <span id="preview-phone">联系电话</span>
+                        </div>
+                        <div class="contact-item" id="preview-location-container">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="preview-location">所在地</span>
+                        </div>
+                        <div class="contact-item" id="preview-website-container" style="display: none;">
+                            <i class="fas fa-globe"></i>
+                            <a id="preview-website" href="#" target="_blank">个人网站</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section" id="summary-section">
+                    <h2><i class="fas fa-user"></i> 个人简介</h2>
+                    <div class="section-content">
+                        <p id="preview-summary">个人简介内容将显示在这里...</p>
+                    </div>
+                </div>
+
+                <div class="resume-section" id="education-section">
+                    <h2><i class="fas fa-graduation-cap"></i> 教育经历</h2>
+                    <div class="section-content">
+                        <div id="preview-education">
+                            <p class="empty-notice">尚未添加教育经历</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section" id="experience-section">
+                    <h2><i class="fas fa-briefcase"></i> 工作经验</h2>
+                    <div class="section-content">
+                        <div id="preview-experience">
+                            <p class="empty-notice">尚未添加工作经验</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section" id="skills-section">
+                    <h2><i class="fas fa-cogs"></i> 专业技能</h2>
+                    <div class="section-content">
+                        <div id="preview-skills">
+                            <p class="empty-notice">尚未添加技能</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="resume-section" id="projects-section" style="display: none;">
+                    <h2><i class="fas fa-project-diagram"></i> 项目经验</h2>
+                    <div class="section-content">
+                        <div id="preview-projects">
+                            <p class="empty-notice">尚未添加项目经验</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="job.js"></script>
+</body>
+</html>
