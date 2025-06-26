@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  list-style: none;
+}
+
+.store__nav {
+  display: flex;
+  padding: 0 107px;
+  height: 70px;
+  align-items: center;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  box-sizing: border-box;
+  /* 宽度以内容还是边框为准 */
+  z-index: 999;
+  background-color: #fff;
+}
+
+.store__nav__logo {
+  width: 46px;
+  height: 46px;
+}
+
+.store__nav__logo img {
+  width: 100%;
+  height: 100%;
+}
+
+.store__nav__list {
+  flex: 1;
+  font-size: 18px;
+}
+
+.list {
+  display: flex;
+}
+
+.list__item {
+  margin-left: 36px;
+}
+
+.button--primary {
+  width: 71px;
+  height: 44px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: none;
+}
+
+.login {
+  background-color: #fff;
+  color: #000;
+}
+
+.register {
+  background-color: #000;
+  color: #fff;
+}
+
+.store-search {
+  margin-top: 70px;
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  padding: 36px 0;
+}
+
+.search-box--input {
+  width: 853px;
+  height: 56px;
+  font-size: 18px;
+  position: relative;
+}
+
+.search-input {
+  width: 100%;
+  height: 100%;
+  font-size: 18px;
+  box-sizing: border-box;
+  border-radius: 9px;
+  padding-left: 53px;
+  padding-right: 108px;
+}
+
+.search-button {
+  position: absolute;
+  right: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 89px;
+  height: 44px;
+  background-color: #000;
+  color: #fff;
+}
+
+.search-icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.search-hot {
+  margin-top: 9px;
+  font-size: 16px;
+  color: #6B7280;
+}
+
+.search-hot a {
+  color: #6B7280;
+  text-decoration: none;
+  margin-right: 8px;
+}
+
+.category-title {
+  padding: 13px 107px;
+  box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+.category-title__list {
+  display: flex;
+}
+
+.list-item {
+  margin-right: 36px;
+  color: #4B5563;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.list-item:nth-child(1) {
+  color: #000;
+}
+
+.category-content {
+  background-color: #F9FAFB;
+  padding: 36px 107px 142px 107px;
+}
+
+.content-banner img {
+  width: 100%;
+}
