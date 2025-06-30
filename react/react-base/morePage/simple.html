@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Simple SPA</h1>
+  <div id="root">
+    <!-- 页面内容将被 JavaScript 动态填充 -->
+  </div>
+
+  <script>
+    let home = `
+      <h1>Home Page</h1>
+      <p>Welcome to the home page!</p>
+      <button id='btn'>go about</button>
+    `;
+
+    let about = `
+      <h1>About Page</h1>
+      <p>This is the about page.</p>
+    `;
+
+    let root = document.getElementById('root');
+    root.innerHTML = home;
+
+    let btn = document.getElementById('btn');
+    btn.addEventListener('click', function() {
+      root.innerHTML = about;
+    });
+
+  </script>
+</body>
+</html>
