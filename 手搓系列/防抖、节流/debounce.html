@@ -24,6 +24,7 @@
         let that = this
         clearTimeout(timer)
         timer = setTimeout(function () {
+          //fn.apply(this, args); // 不需要数组解构，args数组，盛放参数列表  apply方法显式绑定this
           fn.call(that, ...arg) // 数组解构，args盛放参数列表  显式绑定this指向
         }, wait)
       }

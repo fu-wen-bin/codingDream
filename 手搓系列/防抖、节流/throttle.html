@@ -22,7 +22,8 @@
       return function (...arg) {
         let nowTime = Date.now()  // 第一次点击的时间戳
         if (nowTime - preTime >= wait) {
-          fn.call(this, ...arg)
+          // fn.apply(this, args); // 不需要数组解构，args数组，盛放参数列表  apply方法显式绑定this
+          fn.call(this, ...arg)  // call 数组解构，直接传入参数列表  显式绑定this指向
           preTime = nowTime
         }
       }
