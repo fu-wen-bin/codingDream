@@ -20,11 +20,11 @@
 
     function debounce (fn, wait) {
       var timer = null
-      return function (...arg) {
+      return function (...arg) {  // 函数this指向btn 扩展运算符，将参数转为数组，用于传递参数
         let that = this
         clearTimeout(timer)
         timer = setTimeout(function () {
-          fn.call(that, ...arg)
+          fn.call(that, ...arg) // 数组解构，args盛放参数列表  显式绑定this指向
         }, wait)
       }
     }
