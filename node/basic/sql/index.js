@@ -7,7 +7,7 @@ const server = http.createServer((req, res) => {
     const connection = mysql.createConnection({
       host: 'localhost',
       user: 'root',
-      password: '12345678',
+      password: '123456',
       database: 'demo',
     })
     connection.query('select * from user', (err, data) => {
