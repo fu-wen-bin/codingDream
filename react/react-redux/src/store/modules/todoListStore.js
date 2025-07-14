@@ -22,6 +22,7 @@ const todoList = createSlice({
     },
 
     toggleAll (state) {
+      // 判断是否所有任务都已完成 -- every返回 true 或 false
       const allCompleted = state.list.every(item => item.completed === true)
       state.list.forEach((item) => {
         return item.completed = !allCompleted
