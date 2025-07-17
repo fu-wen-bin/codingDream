@@ -13,24 +13,44 @@
 
 - 原子化CSS，只需要写类名，不需要写样式
 
-安装：
+### 安装：
+
 ```bash
 npm install tailwindcss postcss autoprefixer
 ```
+
 - 配置文件：
+
 ```bash
 # 生成 tailwind.config.js 和 postcss.config.js 配置文件，post配置文件用于帮助兼容css
 npx tailwindcss init -p 
 ```
+
 ## 准备
 
 ### allotment 拖拽依赖
+
 ```bash
 # 安装可以拖动容器的依赖
 npm install allotment --save
 ```
+
 ### zustand 仓库
 
 ```bash
 npm install zustand --save
 ```
+
+# 项目梳理
+
+1. 创建了`componentsStore`仓库
+    - 存放整个`json`对象(`components`数组)。
+    - 定义了往该`json`对象中**添加**、**移除**和**更新**子对象(组件)内部属性的函数
+
+
+2. 创建了`componentsConfigStore`仓库
+    - 存放`json`组件树中**每一类组件的配置文件**(`componentsConfig`对象)，与`componentsStore`仓库中的`components`形成映射关系
+    - 定义了注册组件的函数
+
+
+3. 定义了 `renderComponents`函数用来将整个`json`渲染成真实的HTML结构 -- 借助了`React.createElement`函数来实现递归渲染

@@ -1,5 +1,6 @@
 import { Button, Space } from 'antd'
-import useComponentsStore from '../../stores/components.tsx'
+import { useComponentsStore } from '../../stores/components.tsx'
+// import { useComponentsStore } from '../../stores/components.tsx'
 
 export default function Header () {
 
