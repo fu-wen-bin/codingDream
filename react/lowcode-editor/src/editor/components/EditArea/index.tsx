@@ -41,6 +41,8 @@ export default function EditArea () {
         config.component,
         {
           key: component.id,
+          id: component.id,
+          name: component.name,
           ...config.defaultProps, // 使用默认属性
           ...component.props, // 使用组件的属性
         },
@@ -50,7 +52,7 @@ export default function EditArea () {
   }
 
   return (
-    <div>
+    <div className="h-[100%]">
       {renderComponents(components)}
       {/*<pre>
         {

@@ -53,4 +53,17 @@ npm install zustand --save
     - 定义了注册组件的函数
 
 
-3. 定义了 `renderComponents`函数用来将整个`json`渲染成真实的HTML结构 -- 借助了`React.createElement`函数来实现递归渲染
+3. 定义了 `renderComponents`函数用来将整个`json`渲染成真实的HTML结构
+    - 借助了`React.createElement`函数来实现递归渲染
+
+
+4. 实现物料区的组件拖拽到画布区
+    - react-dnd 库 --> 用于跨组件传递数据
+    - react-dnd-html5-backend 库 --> 用于实现拖拽功能
+
+       ```bash
+       # 安装拖拽相关依赖
+       npm install react-dnd react-dnd-html5-backend --save
+       ```
+
+- 将一个组件拖拽到画布区时，触发`onDrop`事件，将该组件添加到`json`树中进行渲染
