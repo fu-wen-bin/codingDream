@@ -1,17 +1,23 @@
 import type { CommonComponentProps } from '../../interface.ts'
-import { useDrop } from 'react-dnd' // 可以接收拖动的组件
-import { message } from 'antd'
+import useMaterialDrop from '../../hooks/useMaterialDrop.ts'
+/*import { useDrop } from 'react-dnd'
 import { useComponentsStore } from '../../stores/components'
 import { useComponentConfigStore } from '../../stores/component-config'
+import { message } from 'antd'*/
 
-export default function Page ({ id, name, children }: CommonComponentProps) {
-  const [messageApi, contextHolder] = message.useMessage()
+export default function Page ({ id, children }: CommonComponentProps) {
+
+  /*const [messageApi, contextHolder] = message.useMessage()
   const { addComponent } = useComponentsStore() // 获取添加组件的函数
-  const { componentConfig } = useComponentConfigStore() // 获取组件配置
+  const { componentConfig } = useComponentConfigStore() // 获取组件配置*/
 
-  const [{ canDrop }, dropRef] = useDrop(() => ({
+  /*const [{ canDrop }, dropRef] = useDrop(() => ({
       accept: ['Button', 'Container', 'Page'],
-      drop: (item: { type: string }) => {
+      drop: (item: { type: string }, monitor) => {
+        const didDrop = monitor.didDrop() // 是否被动冒泡接收组件
+        if (didDrop) {
+          return
+        }
         messageApi.success(item.type + ' dropped!')
         // 将拖动的组件添加到json对象中
         const props = componentConfig?.[item.type]?.defaultProps || {}
@@ -27,11 +33,16 @@ export default function Page ({ id, name, children }: CommonComponentProps) {
         }
       },
     }),
-  )
+  )*/
+
+  const { canDrop, dropRef, contextHolder } = useMaterialDrop(
+    ['Button', 'Container'], id)
+
   return (
     <>
       {contextHolder}
       <div ref={dropRef}
+           data-component-id={id}
            className="p-[20px] h-[100%] box-border"
            style={{
              background: canDrop ? 'rgba(83, 107, 127, 0.2)' : '',

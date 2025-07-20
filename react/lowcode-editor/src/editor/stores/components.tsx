@@ -11,12 +11,15 @@ export interface Component {
 
 export interface State {
   components: Component[]; // 组件列表
+  curComponentId: number | null; // 当前选中的组件 ID
+  curComponent: Component | null; // 当前选中的组件对象
 }
 
 export interface Action {
   addComponent: (component: any, parentId?: number) => void; // 添加组件方法
   deleteComponent: (componentId: number) => void; // 删除组件方法
   updateComponent: (componentId: number, props: any) => void; // 更新组件属性
+  setCurComponentId: (componentId: number | null) => void; // 设置当前选中组件 ID
 }
 
 // State 代表整个仓库实例
@@ -31,6 +34,8 @@ export const useComponentsStore = create<State & Action>(
         desc: '页面',
       },
     ],
+    curComponentId: null, // 当前选中的组件 ID
+    curComponent: null, // 当前选中的组件对象
 
     // 方法
     addComponent: (component, parentId) => {
@@ -82,6 +87,14 @@ export const useComponentsStore = create<State & Action>(
         }
         return { components: [...state.components] }
       })
+    },
+
+    setCurComponentId: (componentId) => {
+      set((state) => ({
+          curComponentId: componentId,
+          curComponent: getComponentById(componentId, state.components),
+        }),
+      )
     },
   }),
 )
