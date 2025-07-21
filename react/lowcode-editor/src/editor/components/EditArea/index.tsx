@@ -91,12 +91,11 @@ export default function EditArea () {
       {/* 渲染组件树 */}
       {renderComponents(components)}
 
-      {/* 当有悬停组件时显示悬停遮罩 */}
-      {hoverComponentId && (
+      {/* 当有悬停组件且不是所点击的组件时显示悬停遮罩 */}
+      {hoverComponentId && hoverComponentId !== curComponentId && (
         <HoverMask
           componentId={hoverComponentId}
           containerClassName="edit-area"
-          // 指定生成Portal蒙版容器的位置的类名
           portalWrapperClassName="portal-wrapper"
         />
       )}

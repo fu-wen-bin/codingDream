@@ -7,6 +7,7 @@ export interface ComponentConfig {
   name: string;
   defaultProps: Record<string, any>;
   component: any
+  desc: string; // 组件描述
 }
 
 export interface State {
@@ -24,10 +25,12 @@ export const useComponentConfigStore = create<State & Action>(
       Container: {
         name: 'Container',
         defaultProps: {},
+        desc: '容器组件',
         component: Container,
       },
       Button: {
         name: 'Button',
+        desc: '按钮组件',
         defaultProps: {
           type: 'primary',
           text: '按钮',
@@ -36,6 +39,7 @@ export const useComponentConfigStore = create<State & Action>(
       },
       Page: {
         name: 'Page',
+        desc: '页面组件',
         defaultProps: {},
         component: Page,
       },

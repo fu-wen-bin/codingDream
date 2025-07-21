@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { Space, Popconfirm } from 'antd'
+import { Popconfirm, Space } from 'antd'
 import { getComponentById, useComponentsStore } from '../../stores/components'
 import { DeleteOutlined } from '@ant-design/icons'
 
@@ -10,7 +10,11 @@ interface SelectedMaskProps {
   componentId: number
 }
 
-export default function SelectedMask({ containerClassName, portalWrapperClassName, componentId }: SelectedMaskProps) {
+export default function SelectedMask ({
+                                        containerClassName,
+                                        portalWrapperClassName,
+                                        componentId,
+                                      }: SelectedMaskProps) {
   const [position, setPosition] = useState({
     top: 0,
     left: 0,
@@ -20,7 +24,12 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
     labelLeft: 0,
   })
 
-  const { components, curComponentId, deleteComponent, setCurComponentId } = useComponentsStore()
+  const {
+    components,
+    curComponentId,
+    deleteComponent,
+    setCurComponentId,
+  } = useComponentsStore()
 
   useEffect(() => {
     updatePosition()
@@ -37,9 +46,7 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
     }
   }, [])
 
-
-
-  function updatePosition() {
+  function updatePosition () {
     if (!componentId) {
       return
     }
@@ -50,8 +57,12 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
     const node = document.querySelector(`[data-component-id="${componentId}"]`)
     if (!node) return
     // 获取到 node 的几何属性
+    // get.getBoundingClientRect() 返回一个 DOMRect 对象，提供元素的大小及其相对于视口的位置
     const { top, left, width, height } = node.getBoundingClientRect()
-    const { top: containerTop, left: containerLeft } = container.getBoundingClientRect()
+    const {
+      top: containerTop,
+      left: containerLeft,
+    } = container.getBoundingClientRect()
 
     let labelTop = top - containerTop + container.scrollTop
     let labelLeft = left - containerLeft + width
@@ -73,30 +84,30 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
 
   const el = useMemo(() => {
     return document.querySelector(`.${portalWrapperClassName}`)
-  }, [])
+  }, [portalWrapperClassName])
 
-  const curComponent = useMemo(() => {  // 找到被点击的组件对象
+  // 找到被点击的组件对象
+  const curComponent = useMemo(() => {
     return getComponentById(componentId, components)
-  }, [componentId])
+  }, [componentId, components])
 
   const handleDelete = () => {
     // 移除该组件（本质上就是将仓库中的json 数据剔除掉某一个小结点）
+    // ！--> 类型收缩  注意：curComponentId 可能为 null，所以需要使用非空断言
     deleteComponent(curComponentId!)
     setCurComponentId(null!)
   }
-
-
 
   return createPortal((
     <>
       <div
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: position.left,
           top: position.top,
-          backgroundColor: "rgba(0, 0, 255, 0.1)",
-          border: "1px dashed blue",
-          pointerEvents: "none",
+          backgroundColor: 'rgba(0, 0, 255, 0.1)',
+          border: '1px dashed blue',
+          pointerEvents: 'none',
           width: position.width,
           height: position.height,
           zIndex: 14,
@@ -106,13 +117,16 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
       />
       <div
         style={{
-          position: "absolute",
+          position: 'absolute',
           left: position.labelLeft,
           top: position.labelTop,
-          fontSize: "14px",
+          fontSize: '14px',
           zIndex: 15,
-          display: (!position.width || position.width < 10) ? "none" : "inline",
+          display: (!position.width || position.width < 10)
+            ? 'none'
+            : 'inline',
           transform: 'translate(-100%, -100%)',
+          cursor: 'pointer',
         }}
       >
         <Space>
@@ -122,7 +136,7 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
               backgroundColor: 'blue',
               borderRadius: 4,
               color: '#fff',
-              cursor: "pointer",
+              cursor: 'pointer',
               whiteSpace: 'nowrap',
             }}
           >
@@ -136,7 +150,7 @@ export default function SelectedMask({ containerClassName, portalWrapperClassNam
                 cancelText={'取消'}
                 onConfirm={handleDelete}
               >
-                <DeleteOutlined style={{ color: '#fff' }} />
+                <DeleteOutlined style={{ color: '#fff' }}/>
               </Popconfirm>
             </div>
           )}

@@ -20,9 +20,11 @@ export default function useMaterialDrop (accept: string[], id: number) {
         messageApi.success(item.type + ' dropped!')
 
         const props = componentConfig?.[item.type]?.defaultProps || {}
+        const desc = componentConfig?.[item.type]?.desc || ''
         addComponent({
           id: new Date().getTime(),
           name: item.type,
+          desc: desc,
           props: props,
         }, id)
       },

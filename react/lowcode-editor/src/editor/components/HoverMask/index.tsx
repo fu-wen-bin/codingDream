@@ -140,7 +140,7 @@ export default function HoverMask ({
             whiteSpace: 'nowrap', // 防止文字换行
           }}
         >
-          {curComponent?.name}
+          {curComponent?.desc}
         </div>
       </div>
     </>
