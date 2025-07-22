@@ -1,0 +1,26 @@
+.box {
+  width: 100px;
+  height: 100px;
+  background-color: #f00;
+
+  /*rotate默认绕Z轴旋转*/
+  transform: rotate(45deg);
+  /*自定义动画*/
+  animation: rotateZZ 0.5s linear infinite;
+}
+
+@keyframes rotateZZ {
+  /*0% {
+    transform: rotateZ(0deg);
+  }
+  100% {
+    transform: rotateZ(360deg);
+  }*/
+
+  from {
+    transform: translateX(0) rotateZ(0deg);
+  }
+  to {
+    transform: translateX(300px) rotateZ(360deg);
+  }
+}
