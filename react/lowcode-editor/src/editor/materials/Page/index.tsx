@@ -5,7 +5,7 @@ import { useComponentsStore } from '../../stores/components'
 import { useComponentConfigStore } from '../../stores/component-config'
 import { message } from 'antd'*/
 
-export default function Page ({ id, children }: CommonComponentProps) {
+export default function Page ({ id, children, styles }: CommonComponentProps) {
 
   /*const [messageApi, contextHolder] = message.useMessage()
   const { addComponent } = useComponentsStore() // 获取添加组件的函数
@@ -41,11 +41,11 @@ export default function Page ({ id, children }: CommonComponentProps) {
   return (
     <>
       {contextHolder}
-      <div ref={dropRef}
+      <div ref={dropRef as any}
            data-component-id={id}
            className="p-[20px] h-[100%] box-border"
            style={{
-             background: canDrop ? 'rgba(83, 107, 127, 0.2)' : '',
+             background: canDrop ? 'rgba(83, 107, 127, 0.2)' : '', ...styles,
            }}>
         {children}
       </div>

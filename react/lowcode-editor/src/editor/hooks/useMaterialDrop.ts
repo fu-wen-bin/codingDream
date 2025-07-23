@@ -26,6 +26,7 @@ export default function useMaterialDrop (accept: string[], id: number) {
           name: item.type,
           desc: desc,
           props: props,
+          styles:{}
         }, id)
       },
 

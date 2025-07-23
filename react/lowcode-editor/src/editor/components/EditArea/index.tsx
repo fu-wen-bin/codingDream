@@ -40,6 +40,7 @@ export default function EditArea () {
           'data-component-id': component.id, // 确保组件有这个属性，用于悬停检测
           ...config.defaultProps, // 合并默认属性
           ...component.props, // 合并组件自定义属性
+          styles: component.styles, // 合并组件样式
         },
         renderComponents(component.children || []),  // 递归渲染子组件树
       )

@@ -4,7 +4,11 @@ import useMaterialDrop from '../../hooks/useMaterialDrop'
 import { useComponentsStore } from '../../stores/components'
 import { useComponentConfigStore } from '../../stores/component-config'*/
 
-export default function Container ({ children, id }: CommonComponentProps) {
+export default function Container ({
+                                     children,
+                                     id,
+                                     styles,
+                                   }: CommonComponentProps) {
   /*const { addComponent } = useComponentsStore()
   const { componentConfig } = useComponentConfigStore()*/
   // 能接收拖拽进来的组件
@@ -37,12 +41,18 @@ export default function Container ({ children, id }: CommonComponentProps) {
   return (
     <>
       {contextHolder}
-      <div ref={dropRef}
-           data-component-id={id}
-           className="border-[1px] border-[#000] min-h-[100px] p-[20px]"
-           style={{
-             background: canDrop ? 'rgba(83, 107, 127, 0.2)' : '',
-           }}>
+      <div
+        data-component-id={id}
+        ref={dropRef as any}
+        className={`
+          min-h-[100px] 
+          p-[20px] 
+          ${canDrop
+          ? 'border-[2px] border-[blue]'
+          : 'border-[1px] border-[#000]'}
+        `}
+        style={styles}
+      >
         {children}
       </div>
     </>

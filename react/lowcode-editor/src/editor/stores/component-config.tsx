@@ -16,6 +16,8 @@ export interface ComponentConfig {
   component: any
   desc: string; // 组件描述
   setter?: ComponentSetter[]; // 组件属性设置器
+  stylesSetter?: ComponentSetter[]; // 组件样式设置器
+
 }
 
 export interface State {
@@ -46,15 +48,33 @@ export const useComponentConfigStore = create<State & Action>(
         component: Button,
         setter: [
           {
-            name:'type',
-            label: '类型',
+            name: 'type',
+            label: '按钮类型',
             type: 'select',
-            options:[
+            options: [
               { label: '主要', value: 'primary' },
-              { label: '次要', value: 'secondary' }
-            ]
+              { label: '次要', value: 'secondary' },
+            ],
+          },
+          {
+            name: 'text',
+            label: '文本',
+            type: 'input',
+          },
+        ],
+        stylesSetter:[
+          {
+            name: 'width',
+            label: '宽度',
+            type: 'inputNumber',
+          },
+          {
+            name: 'height',
+            label: '高度',
+            type: 'inputNumber',
           }
         ],
+
       },
       Page: {
         name: 'Page',

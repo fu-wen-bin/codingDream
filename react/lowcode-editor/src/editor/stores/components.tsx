@@ -1,9 +1,11 @@
 import { create } from 'zustand'
+import type { CSSProperties } from 'react'
 
 export interface Component {
   id: number; // 组件唯一标识符
   name: string; // 组件名称
   props: any; // 组件属性
+  styles?: CSSProperties; // 组件样式
   desc?: string; // 组件描述
   children?: Component[]; // 子组件列表
   parentId?: number; // 父组件唯一标识符
@@ -20,6 +22,7 @@ export interface Action {
   deleteComponent: (componentId: number) => void; // 删除组件方法
   updateComponent: (componentId: number, props: any) => void; // 更新组件属性
   setCurComponentId: (componentId: number | null) => void; // 设置当前选中组件 ID
+  updateComponentStyles?: (componentId: number, styles: CSSProperties) => void; // 更新组件样式
 }
 
 // State 代表整个仓库实例
@@ -96,6 +99,23 @@ export const useComponentsStore = create<State & Action>(
         }),
       )
     },
+
+    updateComponentStyles: (componentId, styles) => {
+      set((state) => {
+          const component = getComponentById(componentId, state.components)
+          if (component) {
+            component.styles = { ...component.styles, ...styles }
+            return {
+              components: [...state.components],
+            }
+          }
+          return {
+            components: [...state.components],
+          }
+        },
+      )
+    },
+
   }),
 )
 
