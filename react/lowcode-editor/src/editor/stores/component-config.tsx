@@ -1,7 +1,10 @@
 import { create } from 'zustand'
-import Container from '../materials/Container'
-import Button from '../materials/Button'
-import Page from '../materials/Page'
+import ContainerDev from '../materials/Container/dev'
+import ContainerProd from '../materials/Container/prod'
+import ButtonDev from '../materials/Button/dev'
+import ButtonProd from '../materials/Button/prod'
+import PageDev from '../materials/Page/dev'
+import PageProd from '../materials/Page/prod'
 
 export interface ComponentSetter {
   name: string;
@@ -13,10 +16,12 @@ export interface ComponentSetter {
 export interface ComponentConfig {
   name: string;
   defaultProps: Record<string, any>;
-  component: any
+  // component: any
   desc: string; // 组件描述
   setter?: ComponentSetter[]; // 组件属性设置器
   stylesSetter?: ComponentSetter[]; // 组件样式设置器
+  dev: any,  // 开发模式下的组件
+  prod: any  // 预览模式下的组件
 
 }
 
@@ -36,24 +41,32 @@ export const useComponentConfigStore = create<State & Action>(
         name: 'Container',
         defaultProps: {},
         desc: '容器',
-        component: Container,
+        dev: ContainerDev,
+        prod: ContainerProd,
       },
       Button: {
         name: 'Button',
-        desc: '按钮',
         defaultProps: {
           type: 'primary',
           text: '按钮',
         },
-        component: Button,
+        desc: '按钮',
+        dev: ButtonDev,
+        prod: ButtonProd,
         setter: [
           {
             name: 'type',
             label: '按钮类型',
             type: 'select',
             options: [
-              { label: '主要', value: 'primary' },
-              { label: '次要', value: 'secondary' },
+              {
+                label: '主要按钮',
+                value: 'primary',
+              },
+              {
+                label: '次要按钮',
+                value: 'default',
+              },
             ],
           },
           {
@@ -62,7 +75,7 @@ export const useComponentConfigStore = create<State & Action>(
             type: 'input',
           },
         ],
-        stylesSetter:[
+        stylesSetter: [
           {
             name: 'width',
             label: '宽度',
@@ -72,15 +85,15 @@ export const useComponentConfigStore = create<State & Action>(
             name: 'height',
             label: '高度',
             type: 'inputNumber',
-          }
+          },
         ],
-
       },
       Page: {
         name: 'Page',
-        desc: '页面',
         defaultProps: {},
-        component: Page,
+        desc: '页面',
+        dev: PageDev,
+        prod: PageProd,
       },
     },
 
@@ -89,8 +102,8 @@ export const useComponentConfigStore = create<State & Action>(
         return {
           ...state,
           componentConfig: {
-            ...state.componentConfig, // 保留现有的组件配置
-            [name]: componentConfig, // 添加或更新新的组件配置
+            ...state.componentConfig,
+            [name]: componentConfig,
           },
         }
       })

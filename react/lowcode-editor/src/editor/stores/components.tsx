@@ -13,6 +13,7 @@ export interface Component {
 
 export interface State {
   components: Component[]; // 组件列表
+  mode: 'edit' | 'preview',
   curComponentId: number | null; // 当前选中的组件 ID
   curComponent: Component | null; // 当前选中的组件对象
 }
@@ -23,6 +24,7 @@ export interface Action {
   updateComponent: (componentId: number, props: any) => void; // 更新组件属性
   setCurComponentId: (componentId: number | null) => void; // 设置当前选中组件 ID
   updateComponentStyles?: (componentId: number, styles: CSSProperties) => void; // 更新组件样式
+  setMode: (mode: 'edit' | 'preview') => void;
 }
 
 // State 代表整个仓库实例
@@ -37,6 +39,7 @@ export const useComponentsStore = create<State & Action>(
         desc: '页面',
       },
     ],
+    mode: 'edit',
     curComponentId: null, // 当前选中的组件 ID
     curComponent: null, // 当前选中的组件对象
 
@@ -116,6 +119,9 @@ export const useComponentsStore = create<State & Action>(
       )
     },
 
+    setMode: (mode) => {
+      return set({ mode: mode })
+    },
   }),
 )
 
