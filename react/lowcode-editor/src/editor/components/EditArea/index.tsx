@@ -26,13 +26,13 @@ export default function EditArea () {
     return components.map((component: Component) => {
       // 根据组件名称获取对应的组件配置
       const config = componentConfig?.[component.name]
-      if (!config?.component) { // 没有对应的组件，比如：'Page'
+      if (!config?.dev) { // 没有对应的组件，比如：'Page'
         return null
       }
       // 使用React.createElement动态创建组件实例
       // 确保添加data-component-id属性用于悬停检测
       return React.createElement(
-        config.component,
+        config.dev,
         {
           key: component.id,
           id: component.id,
