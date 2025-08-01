@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>history</title>
+</head>
+<body>
+  <ul>
+    <li><a href="/home">首页</a></li>
+    <li><a href="/about">关于</a></li>
+  </ul>
+
+  <!-- url变更后展示对应的代码片段 -->
+  <div id="root"></div>
+
+  <script>
+    const routes = [
+      { path: '/', component: () => {return '<h1>首页页面</h1>'} },
+      { path: '/home', component: () => {return '<h1>首页页面</h1>'} },
+      { path: '/about', component: () => {return '<h1>关于页面</h1>'} },
+    ]
+
+    function renderView (path) {
+      let route = routes.find(route => route.path === path)
+      if (route) {
+        document.getElementById('root').innerHTML = route.component()
+      } else {
+        document.getElementById('root').innerHTML = '<h1>404 页面未找到</h1>'
+      }
+    }
+
+    function onLoad () {
+      let linkList = document.querySelectorAll('a[href]')  // 修正这里的拼写错误：herf -> href
+      console.log('找到链接数量:', linkList.length)
+      linkList.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault() // 阻止默认的跳转行为
+          history.pushState(null, '', link.getAttribute('href')) // 使用history API改变地址栏
+          console.log(location.pathname) // 打印当前的路径
+          renderView(location.pathname) // 渲染对应的视图
+        })
+      })
+    }
+
+    window.addEventListener('popstate', () => { // 监听浏览器的前进后退按钮
+      renderView(location.pathname)
+    })
+
+    window.addEventListener('DOMContentLoaded', () => {
+      onLoad() // 初始化链接事件
+    })
+  </script>
+</body>
+</html>

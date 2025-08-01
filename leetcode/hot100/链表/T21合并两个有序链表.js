@@ -18,6 +18,8 @@ let mergeTwoLists = function (list1, list2) {
 
 // 迭代法
 // 迭代是函数内某段代码实现循环
+// 特点：1.使用循环 2.状态更新 3.条件终止 4.逐步处理
+
 // 迭代与普通循环的区别是：
 // 循环代码中参与运算的变量同时是保存结果的变量，当前保存的结果作为下一次循环计算的初始值
 let mergeTwoLists2 = function (list1, list2) {

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hash</title>
+</head>
+<body>
+  <ul>
+    <li><a href="#/home">首页</a></li>
+    <li><a href="#/about">关于</a></li>
+  </ul>
+
+  <!-- url变更后展示对应的代码片段 -->
+  <div id="root"></div>
+
+  <script>
+    const routes = [
+      { path: '/', component: () => {return '<h1>首页页面</h1>'} },
+      { path: '/home', component: () => {return '<h1>首页页面</h1>'} },
+      { path: '/about', component: () => {return '<h1>关于页面</h1>'} },
+    ]
+
+    // 监听地址栏的变化
+    window.addEventListener('hashchange', (e) => {
+      console.log('url变更了', location.hash)
+      // js中location对象代表当前的地址栏
+      const hash = location.hash.slice(1) // 去掉开头的 #
+      renderView(hash)
+    })
+
+    function renderView (url) {
+      const route = routes.find(route => route.path === url)
+      if (route) {
+        document.getElementById('root').innerHTML = route.component()
+      } else {
+        document.getElementById('root').innerHTML = '<h1>404 页面不存在</h1>'
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // 页面加载时，渲染当前的hash对应的内容
+      const hash = location.hash.slice(1) || '/' // 默认显示首页
+      renderView(hash)
+    })
+  </script>
+</body>
+</html>
