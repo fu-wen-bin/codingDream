@@ -27,3 +27,46 @@
 原理：
 - 通过`pushState`和`replaceState`方法来修改浏览器的URL
 - 获取URL变化可以通过监听`popstate`事件
+
+# 路由传参
+
+1. 使用`useNavigate`进行路由跳转时，可以通过不同方式传递参数。
+
+   ```js
+   navigate('/home?id=1')  // useSearchParams()// 获取路由参数
+   
+   // 使用示例
+
+   // 获取当前路由信息
+   const [searchParams] = useSearchParams()
+   // 获取路由参数
+   console.log(searchParams.get('category'))
+   ```
+
+2. 使用`useParams`获取路由参数。
+
+   ```js
+   navigate('/home/1')  // 配置路由时 path:'home/:id'   useParams() // 获取当前路由参数
+    
+   // 使用示例
+   const params = useParams()
+   return(
+     <div>
+       NoteList ---- {params.category}
+     </div>
+   )
+   ```
+
+3. 使用`state`传递参数，这种方式不会显示在地址栏中。
+
+   ```js
+   navigate('/home', { // 和第一种一样，但不会显示在地址栏
+     state: {
+       id: 1,
+     },
+   })  //useLocation() // 获取路由参数
+   
+   // 使用示例
+   const { state } = useLocation()  // 从注册页传过来的参数
+   console.log(state.category)  
+   ```
