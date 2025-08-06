@@ -1,3 +1,13 @@
-const url = import .meta.url // 获取一个文件的绝对路径
+import { loadCorpus } from './lib/corpus.js'
+import { createRandomPicker } from './lib/random.js'
+import { generate } from './lib/generator.js'
 
-console.log(url)
+const corpus = loadCorpus('./corpus/data.json')
+
+const title = createRandomPicker(corpus.title)()
+const article = generate(title, {corpus, min:2000, max:3000})
+console.log(title);
+console.log(article);
+
+
+
