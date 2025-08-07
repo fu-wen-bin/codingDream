@@ -1,6 +1,5 @@
 export function randomInt (min, max) {  // 生成一个 >= min 且 < max 之间的随机整数
-  const p = Math.random()
-  return Math.floor(min * (1 - p) + max * p)
+  return Math.floor(min + Math.random() * (max - min + 1))
 }
 
 export function createRandomPicker (arr) {

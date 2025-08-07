@@ -18,9 +18,14 @@ const server = net.createServer((socket) => {  // 建立连接时
 
     if (matched) {
       const path = matched[1]
-      socket.write(responseData('<h1>hello world</h1>'))
+      if (path === '/') {
+        socket.write(responseData('<h1>hello world</h1>'))
+      }
+      // console.log(`DATA:\n\n${data}`);
+      else {
+        socket.write(responseData('<h1>404 Not Found</h1>', 404, 'Not Found'))
+      }
     }
-    // console.log(`DATA:\n\n${data}`);
   })
   socket.on('close', () => {
     console.log('连接断开')

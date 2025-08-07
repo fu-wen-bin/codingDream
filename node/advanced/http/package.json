@@ -1,0 +1,16 @@
+{
+  "name": "http",
+  "version": "1.0.0",
+  "main": "http-simple.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "checksum": "^1.0.0",
+    "mime": "^2.6.0"
+  }
+}
