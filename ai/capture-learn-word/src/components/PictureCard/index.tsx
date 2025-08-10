@@ -35,6 +35,12 @@ export default function PictureCard ({ word, submit, audio }: PictureCardProps) 
 
   }
 
+  const playAudio = async () => {
+    const au = new Audio(audio)
+    await au.play()
+  }
+
+
   return (
     <div className="card">
       <input id="selectImage" type="file"
@@ -47,10 +53,11 @@ export default function PictureCard ({ word, submit, audio }: PictureCardProps) 
       <div className="word">
         {word}
       </div>
-      <div className="playAudio">
+      <div className="playAudio" onClick={playAudio}>
         <img width={20}
              src="https://res.bearbobo.com/resource/upload/Omq2HFs8/playA-3iob5qyckpa.png"
              alt=""/>
+        <audio src={audio}/>
       </div>
     </div>
   )
