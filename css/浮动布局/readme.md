@@ -63,10 +63,10 @@
     2. `BFC`可以阻止这种塌陷，确保子容器的`margin`不会影响父容器。
 
 - `BFC`的触发条件：
-    1. `overflow: hidden || auto || scroll || overlay`
-    2. `position: absolute || fixed`
-    3. `display: inline-xxx || flex || grid`
-    4. `float: left || right`
+    1. `overflow: hidden || auto || scroll || overlay` -- 不为 visible
+    2. `position: absolute || fixed` 
+    3. `display: inline-xxx || flex || grid || table-xxx`
+    4. `float: left || right` -- 不为none
 
 - `BFC`容器的特征:
     1. 当一个容器成为`BFC`容器后，它会形成一个独立的渲染区域

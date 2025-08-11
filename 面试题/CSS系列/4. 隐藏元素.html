@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4. 隐藏元素</title>
+  <style>
+    .box {
+      width: 200px; /* 内容宽度 */
+      height: 200px; /* 内容高度 */
+      padding: 20px; /* 内边距 */
+      margin: 20px; /* 外边距 */
+      border: 2px solid black; /* 边框 */
+      background-color: lightblue; /* 背景颜色 */
+      /*display: none; !* 隐藏元素 *!*/
+      /*visibility: hidden; !* 可见性隐藏元素 *!*/
+      opacity: 0; /* 透明度隐藏元素 */
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+
+  <script>
+    document.querySelector('.box').addEventListener('click', function() {
+      console.log('Box clicked!');
+    });
+  </script>
+</body>
+</html>

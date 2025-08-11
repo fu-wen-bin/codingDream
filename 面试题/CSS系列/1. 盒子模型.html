@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>盒子模型</title>
+  <style>
+    .box {
+      width: 200px; /* 内容宽度 */
+      height: 200px; /* 内容高度 */
+      padding: 20px; /* 内边距 */
+      margin: 20px; /* 外边距 */
+      border: 2px solid black; /* 边框 */
+      background-color: lightblue; /* 背景颜色 */
+    }
+    .box1 {
+      box-sizing: border-box; /* IE(怪异)盒子模型 */
+      width: 200px; /* 内容宽度 */
+      height: 200px; /* 内容高度 */
+      padding: 20px; /* 内边距 */
+      margin: 20px; /* 外边距 */
+      border: 2px solid black; /* 边框 */
+      background-color: lightcoral; /* 背景颜色 */
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+  <br>
+  <div class="box1"></div>
+</body>
+</html>

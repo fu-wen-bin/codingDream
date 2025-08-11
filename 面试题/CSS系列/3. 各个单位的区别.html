@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3. 各个单位的区别</title>
+  <style>
+    .box {
+      height: 50rem; /* 内容高度 -- rem 根据浏览器根字体大小 */
+      width: 50rem;
+      font-size: 20px; /* px绝对单位 */
+      background-color: lightblue; /* 背景颜色 */
+    }
+
+    .wrap {
+      font-size: 5em; /* rem 根据父容器字体大小*/
+      background-color: lightgreen; /* 背景颜色 */
+    }
+  </style>
+</head>
+<body>
+  <div class="box">
+    外层
+    <div class="wrap">
+      内层
+    </div>
+  </div>
+</body>
+</html>

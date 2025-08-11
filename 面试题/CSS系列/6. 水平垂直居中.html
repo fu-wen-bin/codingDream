@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>6. 水平垂直居中</title>
+  <style>
+    * {
+      margin: 0; /* 去掉默认的外边距 */
+      padding: 0; /* 去掉默认的内边距 */
+    }
+
+    body {
+      height: 100vh; /* 视口高度 */
+      /* 方案一 */
+      /*display: flex; !* 使用Flexbox布局 *!
+      justify-content: center; !* 水平居中 *!
+      align-items: center; !* 垂直居中 *!*/
+
+      /* 方案二 */
+      /*position: relative; !* 相对定位 *!*/
+
+      /*!* 方案三 *!
+      display: grid; !* 使用Grid布局 *!
+      place-items: center; !* 水平和垂直居中 *!
+      !* 另一种写法*！
+      justify-content: center; !* 水平居中 *!
+      align-items: center; !* 垂直居中 *!*!*/
+
+      /* 方案四 */
+      display: table-cell; /* 使用表格布局 */
+      width: 100vw; /* 视口高度 */
+      vertical-align: middle; /* 垂直居中 */
+      text-align: center; /* 水平居中 */
+    }
+
+    .box {
+      width: 200px; /* 容器宽度 */
+      height: 200px; /* 容器高度 */
+      border: 2px solid black; /* 边框 */
+      background-color: lightblue; /* 背景颜色 */
+
+      /*!*方案二*!
+      position: absolute; !* 绝对定位 *!
+      top: 50%; !* 距离顶部50% *!
+      left: 50%; !* 距离左侧50% *!
+      !*transform: translate(-50%, -50%); !* 将元素向上和向左*!*!
+      margin-top: -100px; !* 向上移动一半的高度 *!
+      margin-left: -100px; !* 向左移动一半的宽度 *!*/
+
+      /* 方案四 */
+      display: inline-block; /* 让元素成为行内块级元素 */
+
+    }
+  </style>
+</head>
+<body>
+  <div class="box"></div>
+</body>
+</html>

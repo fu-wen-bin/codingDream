@@ -31,7 +31,7 @@
     }
 
     function onLoad () {
-      let linkList = document.querySelectorAll('a[href]')  // 修正这里的拼写错误：herf -> href
+      let linkList = document.querySelectorAll('a[href]')
       console.log('找到链接数量:', linkList.length)
       linkList.forEach(link => {
         link.addEventListener('click', (e) => {

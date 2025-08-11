@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS选择器</title>
+  <style>
+    .box {
+      width: 200px; /* 内容宽度 */
+      height: 200px; /* 内容高度 */
+      border: 2px solid black; /* 边框 */
+      background-color: lightblue; /* 背景颜色 */
+    }
+
+    #wrap {
+      width: 400px; /* 容器宽度 */
+      height: 400px; /* 容器高度 */
+      background-color: lightgreen; /* 容器背景颜色 */
+      margin: 20px auto; /* 外边距，居中显示 */
+    }
+
+    .one {
+      width: 100px; /* 子元素宽度 */
+      height: 100px; /* 子元素高度 */
+      background-color: lightcoral; /* 子元素背景颜色 */
+      position: relative; /* 相对定位 */
+    }
+  </style>
+</head>
+<body>
+  <div class="box" id="wrap">
+    <div class="one">1
+      <div class="one-son"></div>
+    </div>
+    <div class="two">2</div>
+  </div>
+</body>
+</html>
