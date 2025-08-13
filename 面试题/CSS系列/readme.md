@@ -150,3 +150,117 @@
 
 4. 双飞翼布局 (浮动 + 负 margin)
 
+# 八、CSS中有哪些动画？如何实现？
+
+1. 过渡动画   （Transition）
+2. 转变动画   （Transform）
+3. 自定义动画 （animation）
+
+# 九、解释一下回流重绘
+
+- 从输入url 到页面渲染完整过程
+1. 网络层
+2. 浏览器层
+
+- 浏览器层（得到数据包之后）：
+1. 解析 html 数据得到 DOM 树
+2. 解析 css 数据得到 CSSOM 树
+3. 合并 DOM 树和 CSSOM 树得到 渲染树
+4. 计算页面布局 （得到可见的每一个容器的几何属性）（回流）
+5. 将信息发给 GPU，GPU 会根据信息绘制页面（重绘）
+
+- 发生回流的操作：
+   1. 刷新浏览器页面
+   2. 容器的几何属性变更
+   3. 增加或者删除 可见 的DOM 元素
+   4. 浏览器窗口尺寸变更
+
+
+-  DOM:{
+   tag: 'div',
+   style: {
+   width: '100px',
+   height: '100px',
+   background: 'red'
+   }
+   attr: {
+   id: 'app',
+   class: 'container'
+   },
+   children: [
+   {
+   tag: 'div',
+   style: {
+   width: '100px',
+   height: '100px',
+   background: 'red'
+   }
+   attr: {
+   id: 'title',
+   class: 'title'
+   },
+   children: [
+   {
+   text: 'hello world'
+   }
+   ]
+   }
+   ]
+   }
+   <!-- div p span{
+     xxxxxx
+   } -->
+-  CSSOM:{
+   selector: 'div',
+   style: {
+   width: '100px',
+   height: '100px',
+   background: 'red'
+   }
+   }
+
+- 浏览器的优化策略：
+  由于每一次回流重绘都会带来额外的性能消耗，因此大多数浏览器会通过队列来优化回流重绘的次数，浏览器将会导致回流的操作都存入队列，直到一段时间之后或者达到阈值，才一次性清空队列。
+
+- 特殊的属性：
+  offsetWidth, offsetHeight, offsetTop, offsetLeft
+  scrollWidth, scrollHeight, scrollTop, scrollLeft
+  clientWidth, clientHeight, clientTop, clientLeft
+  以上这些属性会强制刷新优化队列
+
+- 如何尽量减少回流重绘
+1. 将要发生回流操作的 dom 先从文档流中剔除，待所有的操作完毕后再添加回文档流
+2. 使用文档碎片
+3. 使用克隆节点
+
+
+# 十、CSS画一个三角形
+1. 裁剪
+2. 边框
+
+# 十一、聊一聊响应式布局
+- 是什么
+  页面上的容器根据屏幕尺寸的变换而自适应的调整布局位置和大小
+
+- 实现方式：
+1. 媒体查询
+2. 百分比
+3. vw/vh
+4. rem + 媒体查询 || js
+
+
+# 十二、画一条 0.5px 的线
+1. transform: scaleY(0.5);
+
+# 十三、让浏览器支持小于 12px 的文字的方式
+1. 新版本已经适配
+2. 老版本 zoom：xx;  （变焦）
+
+# 十四、聊一聊css 的预编译语言 （预处理器）
+- 是什么
+  扩充了css 语法，增加了变量、函数、混合、继承等功能，让css 更好维护书写更高效。
+
+- 有哪些
+1. sass
+2. less
+3. stylus  -- 基于nodejs 运行的一种css 预编译语言
