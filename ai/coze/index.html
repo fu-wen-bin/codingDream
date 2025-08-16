@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="text">
+  <button>提交</button>
+
+  <div class="box"></div>
+
+  <script>
+    let btn = document.querySelector('button') // 获取按钮
+    btn.addEventListener('click', async () => {
+      // console.log('点击了按钮');
+      // 拿到输入框的值
+      // 传给大模型
+      // 拿到大模型返回的结果展示在 box 中
+      let input = document.querySelector('input').value
+
+      const endpoint = 'https://api.coze.cn/open_api/v2/chat'
+      const apiKey = 'pat_wV2U2DS7xt2og3PEwbg2PHWgcex94UCyAZX4F9ruG8mgjzV6FD7QQN2gnneQCqkQ'
+
+      const payload = {
+        bot_id: '7503101903799631909',
+        user: 'wn',
+        query: input,
+        stream: false,
+        chat_history: [],
+        custom_variables: {
+          prompt: '你是一个中国厨师，擅长烹饪中国菜',
+        },
+      }
+
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      })
+
+      const data = await res.json()
+
+      console.log(data.messages[0].content)
+      let box = document.querySelector('.box')
+      box.innerHTML = data.messages[0].content
+
+    })
+  </script>
+</body>
+</html>
