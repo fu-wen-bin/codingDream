@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2. list--事件流应用</title>
+  <style>
+    ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    li {
+      display: inline-block;
+      width: 200px;
+      height: 50px;
+      cursor: pointer;
+      padding: 10px;
+      background-color: #f0f0f0;
+      margin: 5px 0;
+    }
+
+    li:hover {
+      background-color: #d0d0d0;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+  </ul>
+  <script>
+    const ul = document.querySelector('ul')
+    ul.addEventListener('click', function (e) {
+      console.log('ul', e.target.innerHTML)
+      console.log(e)
+    })
+  </script>
+</body>
+</html>
