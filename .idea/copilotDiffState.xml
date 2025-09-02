@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/tiptap/server/hocuspocus/index.js">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/tiptap/server/hocuspocus/index.js" />
+              <option name="originalContent" value="// 保持独立端口监听（已有实现基本可复用）&#10;import { Database } from '@hocuspocus/extension-database'&#10;import { Server } from '@hocuspocus/server'&#10;import { TiptapTransformer } from '@hocuspocus/transformer'&#10;&#10;import { ws_port } from '../base.config.js'&#10;import { logger } from '../utils/logger.js'&#10;&#10;export default () =&gt; {&#10;  // Configure Hocuspocus&#10;  const server = new Server({&#10;    port: ws_port,&#10;    onConnect: async (data) =&gt; {&#10;      console.log('New connection')&#10;    },&#10;    onDisconnect: async (data) =&gt; {&#10;      console.log('Disconnected')&#10;    },&#10;    onStoreDocument: async (data) =&gt; {&#10;      const json = TiptapTransformer.fromYdoc(data.document, 'default')&#10;      console.log('Document stored .... ', data.documentName, json)&#10;    },&#10;    onLoadDocument: async (data) =&gt; {&#10;      console.log('Document loaded')&#10;    },&#10;    extensions: [&#10;      new Database({&#10;        store: async ({ documentName, state }) =&gt; {&#10;          this.db?.run(&#10;            `&#10;                INSERT INTO &quot;documents&quot; (&quot;name&quot;, &quot;data&quot;)&#10;                VALUES ($name, $data)&#10;                ON CONFLICT&#10;                    (name)&#10;                DO UPDATE SET data =&#10;                    $data&#10;            `,&#10;            {&#10;              $name: documentName,&#10;              $data: state,&#10;            },&#10;          )&#10;        },&#10;      }),&#10;    ],&#10;  })&#10;&#10;  logger.success(`WS 服务初始化成功，连接地址：ws://localhost:${ws_port}`)&#10;&#10;}" />
+              <option name="updatedContent" value="// 保持独立端口监听（已有实现基本可复用）&#10;import { Database } from '@hocuspocus/extension-database'&#10;import { Server } from '@hocuspocus/server'&#10;import { TiptapTransformer } from '@hocuspocus/transformer'&#10;&#10;import { ws_port } from '../base.config.js'&#10;import { logger } from '../utils/logger.js'&#10;&#10;export default () =&gt; {&#10;  // Configure Hocuspocus&#10;  const server = new Server({&#10;    port: ws_port,&#10;    onConnect: async (data) =&gt; {&#10;      console.log('New connection')&#10;    },&#10;    onDisconnect: async (data) =&gt; {&#10;      console.log('Disconnected')&#10;    },&#10;    onStoreDocument: async (data) =&gt; {&#10;      const json = TiptapTransformer.fromYdoc(data.document, 'default')&#10;      console.log('Document stored .... ', data.documentName, json)&#10;    },&#10;    onLoadDocument: async (data) =&gt; {&#10;      console.log('Document loaded')&#10;    },&#10;    extensions: [&#10;      new Database({&#10;        store: async ({ documentName, state }) =&gt; {&#10;          // TODO: 在此持久化到数据库；先仅打印避免 this.db 引用导致报错&#10;          console.log('Persist doc:', documentName, 'state size:', state?.byteLength ?? 'unknown')&#10;        },&#10;      }),&#10;    ],&#10;  })&#10;&#10;  logger.success(`WS 服务初始化成功，连接地址：ws://localhost:${ws_port}`)&#10;  // 启动 WS 服务&#10;  server.listen()&#10;}" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

@@ -163,50 +163,53 @@
 2. 浏览器层
 
 - 浏览器层（得到数据包之后）：
-1. 解析 html 数据得到 DOM 树
-2. 解析 css 数据得到 CSSOM 树
-3. 合并 DOM 树和 CSSOM 树得到 渲染树
+1. 解析 `html` 数据得到 `DOM` 树
+2. 解析 `css` 数据得到 `CSSOM` 树
+3. 合并 `DOM` 树和 `CSSOM` 树得到 渲染树
 4. 计算页面布局 （得到可见的每一个容器的几何属性）（回流）
 5. 将信息发给 GPU，GPU 会根据信息绘制页面（重绘）
 
 - 发生回流的操作：
    1. 刷新浏览器页面
    2. 容器的几何属性变更
-   3. 增加或者删除 可见 的DOM 元素
+   3. 增加或者删除 可见的 `DOM` 元素
    4. 浏览器窗口尺寸变更
 
 
--  DOM:{
-   tag: 'div',
-   style: {
-   width: '100px',
-   height: '100px',
-   background: 'red'
+-  ```
+   DOM: {
+     tag: 'div',
+     style: {
+       width: '100px',
+       height: '100px',
+       background: 'red'
+     }
+     attr: {
+       id: 'app',
+       class: 'container'
+     },
+     children: [
+       {
+         tag: 'div',
+         style: {
+           width: '100px',
+           height: '100px',
+           background: 'red'
+         }
+         attr: {
+           id: 'title',
+           class: 'title'
+         },
+         children: [
+           {
+             text: 'hello world'
+           }
+         ]
+       }
+     ]
    }
-   attr: {
-   id: 'app',
-   class: 'container'
-   },
-   children: [
-   {
-   tag: 'div',
-   style: {
-   width: '100px',
-   height: '100px',
-   background: 'red'
-   }
-   attr: {
-   id: 'title',
-   class: 'title'
-   },
-   children: [
-   {
-   text: 'hello world'
-   }
-   ]
-   }
-   ]
-   }
+   ```
+   
    <!-- div p span{
      xxxxxx
    } -->
