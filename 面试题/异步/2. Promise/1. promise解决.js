@@ -17,8 +17,11 @@ function B () {
 A()
   // then 其实可以接收两个函数，第一个函数是成功的回调，第二个函数是失败的回调
   // 如果不传递第二个函数，那么错误会被catch捕获
+  .then((res) => {
+    console.log('A函数执行完毕', res)
+  })
   .then(() => {
-    console.log('A函数执行完毕')
+    console.log('than 2')
   })
   .catch((error) => {
     console.log('A错误', error)
