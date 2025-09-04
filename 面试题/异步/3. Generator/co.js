@@ -20,3 +20,4 @@ co(generatorFunction)
   .then(res => {
     console.log('Final result:', res) // Final result: 3
   })
+

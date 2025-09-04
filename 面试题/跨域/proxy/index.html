@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+</head>
+<body>
+  <script>
+    const xhr = new XMLHttpRequest()
+    xhr.open('GET', '/api') // 通过代理服务器转发到 http://localhost:3000
+    xhr.send()
+    xhr.onreadystatechange = function () {
+      // readyState 分为 0-4 五个阶段
+      // 0: 请求未初始化
+      // 1: 服务器连接已建立
+      // 2: 请求已接收
+      // 3: 请求处理中
+      // 4: 请求已完成，且响应已就绪
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.log(xhr.responseText)
+        }
+      }
+    }
+  </script>
+</body>
+</html>
