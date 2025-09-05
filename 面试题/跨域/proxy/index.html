@@ -8,7 +8,7 @@
 <body>
   <script>
     const xhr = new XMLHttpRequest()
-    xhr.open('GET', '/api') // 通过代理服务器转发到 http://localhost:3000
+    xhr.open('GET', 'http://localhost:3000') // 后端通过代理服务器转发到目标服务器
     xhr.send()
     xhr.onreadystatechange = function () {
       // readyState 分为 0-4 五个阶段
