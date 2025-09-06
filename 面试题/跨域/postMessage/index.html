@@ -6,6 +6,26 @@
   <title>index</title>
 </head>
 <body>
-  <iframe src="https://www.bilibili.com" width="800" height="700" frameborder="0"></iframe>
+  <h1>一级页面</h1>
+  <iframe id="frame" src="http://127.0.0.1:8080" width="800" height="700" frameborder="0"></iframe>
+
+  <!-- <script>
+    let obj = {name: '成哥', age: 18}
+    let frame = document.getElementById('frame')
+    frame.onload = function() {
+      this.contentWindow.postMessage(JSON.stringify(obj), 'http://127.0.0.1:8080')
+
+      window.onmessage = function(e) {
+        console.log(`二级页面传递过来的消息是：${e.data}`)
+      }
+    }
+  </script> -->
+
+  <script>
+    document.domain = '127.0.0.1'
+    document.getElementById('frame').onload = function () {
+      console.log(this.contentWindow.data)
+    }
+  </script>
 </body>
 </html>
