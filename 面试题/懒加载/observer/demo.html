@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      height: 2000px;
+    }
+
+    #box1 {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      margin-top: 100px;
+    }
+
+    #box2 {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div id="box1"></div>
+  <div id="box2"></div>
+
+  <script>
+    const io = new IntersectionObserver((entries) => {
+      console.log(entries)
+    }, {
+      threshold: [0, 0.25, 0.5, 0.75, 1],
+      // root: document.getElementById('container')
+    })
+
+    io.observe(document.getElementById('box1'))
+
+  </script>
+</body>
+</html>

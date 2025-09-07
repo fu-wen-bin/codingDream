@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    img {
+      display: block;
+      height: 200px;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+  <img lazyload="true"
+       data-origin="https://bpic.588ku.com/video_library/cover/24/09/20/56e3b606d41a95b7d279c17a030dc9b4_snapshot_t0.jpg"
+       alt="">
+  <img lazyload="true" data-origin="https://iknow-pic.cdn.bcebos.com/d043ad4bd11373f05ae15e00b60f4bfbfaed0456" alt="">
+  <img lazyload="true"
+       data-origin="https://img1.baidu.com/it/u=4283366487,4202559675&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"
+       alt="">
+  <img lazyload="true"
+       data-origin="https://img0.baidu.com/it/u=893874537,719635393&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" alt="">
+  <img lazyload="true"
+       data-origin="https://gbres.dfcfw.com/Files/iimage/20240323/57925CD649CFE009CCCA98FE52E468C4_w5404h3638.jpg"
+       alt="">
+  <img lazyload="true"
+       data-origin="https://img0.baidu.com/it/u=855319930,4275932786&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"
+       alt="">
+  <img lazyload="true"
+       data-origin="https://img0.baidu.com/it/u=1241101883,3290258568&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"
+       alt="">
+  <img lazyload="true"
+       data-origin="https://n.sinaimg.cn/sinakd20110/0/w2048h1152/20240624/e3bb-814bbab996807e6d8233c13903d06e17.jpg"
+       alt="">
+  <img lazyload="true" data-origin="https://picx.zhimg.com/v2-67f576a3f58ab2d5d2eef07dcb7b14a3_r.jpg" alt="">
+  <img lazyload="true"
+       data-origin="https://img1.baidu.com/it/u=719435224,3466476338&fm=253&fmt=auto&app=120&f=JPEG?w=1422&h=800"
+       alt="">
+  <img lazyload="true"
+       data-origin="https://img0.baidu.com/it/u=1340708445,1349846606&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500"
+       alt="">
+
+  <script>
+    // 获取屏幕高度
+    const viewHeight = window.innerHeight
+
+    function lazyLoad () {
+      const imgs = document.querySelectorAll('img[data-origin][lazyload]')
+      imgs.forEach(item => {
+        const rect = item.getBoundingClientRect()
+        if (rect.top < viewHeight && rect.bottom >= 0) {
+          const url = item.dataset.origin
+          item.src = url
+          item.removeAttribute('lazyload')
+        }
+      })
+
+    }
+
+    lazyLoad()
+
+    window.addEventListener('scroll', throttle(lazyLoad, 1000))
+  </script>
+</body>
+</html>
