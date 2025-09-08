@@ -7,7 +7,7 @@ function flatten1 (arr) {
   for (let i = 0; i < arr.length; i++) {
     if (Array.isArray(arr[i])) {
       // 如果当前元素是数组，递归调用fatten函数
-      res = res.concat(flatten(arr[i]))
+      res = res.concat(flatten1(arr[i]))
     } else {
       res.push(arr[i])
     }
