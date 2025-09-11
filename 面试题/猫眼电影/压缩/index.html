@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>index</title>
+</head>
+<body>
+  <input type="file" id="fileInput">
+  <button id="compressBtn">压缩图片</button>
+  <script>
+    const compressBtn = document.getElementById('compressBtn')
+    const fileInput = document.getElementById('fileInput')
+    let file
+    fileInput.addEventListener('change', (event) => {
+      file = event.target.files[0]
+      if (file) {
+        console.log('Selected file:', file)
+      }
+    })
+
+    compressBtn.addEventListener('click', () => {
+      if (!file) return
+      compressImage(file, 0.8).then((imgBase64) => {
+        const div = document.createElement('div')
+        const img = document.createElement('img')
+        const span = document.createElement('span')
+        img.src = imgBase64
+        span.innerText = `压缩前：${file.size / 1024}kb，压缩后：${getBase64Size(imgBase64)}kb`;
+        div.appendChild(img)
+        div.appendChild(span)
+        document.body.appendChild(div)
+
+      })
+    })
+
+    function compressImage (file, quality) {
+      return new Promise((resolve) => {
+        // FileReader -- 允许异步读取存储在用户计算机上的文件内容
+        const reader = new FileReader()
+        // 成功读取文件的回调函数
+        reader.onload = () => {
+          const img = new Image()
+          img.src = reader.result // js赋值图片的资源地址后，浏览器一定会加载，别的标签不会
+          img.onload = () => {
+            const canvas = document.createElement('canvas')
+            const ctx = canvas.getContext('2d')
+            // 设置canvas宽高
+            canvas.width = img.width
+            canvas.height = img.height
+            // 绘制图片到canvas上
+            ctx.drawImage(img, 0, 0, img.width, img.height)
+            // 压缩图片为jpeg格式，返回图片的base64
+            const imgBase64 = canvas.toDataURL('image/jpeg', quality)
+            resolve(imgBase64)
+          }
+        }
+        // 读取文件内容
+        reader.readAsDataURL(file)
+      })
+    }
+
+    function getBase64Size (base64) {
+      // Base64 编码时，每 4 个字符表示原始数据的 3 个字节，所以最后的大小会相对增大约33%
+      const equalIndex = base64.indexOf('=')
+      if (equalIndex > 0) {
+        base64 = base64.substring(0, equalIndex)
+      }
+      const length = base64.length
+      return length * 0.75 / 1024
+    }
+  </script>
+</body>
+</html>
