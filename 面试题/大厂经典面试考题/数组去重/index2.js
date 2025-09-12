@@ -13,7 +13,7 @@ function unique (arr) {
   for (let i = 0; i < arr.length; i++) {
     let has = false
     for (let j = 0; j < res.length; j++) {
-      if (equel(arr[i], res[j])) {
+      if (equal(arr[i], res[j])) {
         has = true
         break
       }
@@ -26,7 +26,7 @@ function unique (arr) {
   return res
 }
 
-function equel (v1, v2) {
+function equal (v1, v2) {
   if ((typeof v1 === 'object' && v1 !== null) &&
       (typeof v2 === 'object' && v2 !== null)) {
 
@@ -37,7 +37,7 @@ function equel (v1, v2) {
     for (let key in v1) {
       if (key in v2) {
         // v1[key]   v2[key]
-        if (!equel(v1[key], v2[key])) {
+        if (!equal(v1[key], v2[key])) {
           return false
         }
       } else {

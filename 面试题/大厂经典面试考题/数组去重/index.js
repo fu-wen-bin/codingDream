@@ -14,7 +14,7 @@ let arr = [1, 2, 3, 3, 1]
 // }
 
 function unique (arr) {
-  arr.sort()  // [1, 1,  2,  3]
+  arr.sort()  // [1, 1, 2, 3]
   // for (let i = 0; i < arr.length; i++) {
   //   let j = i + 1
   //   if (arr[i] === arr[j]) {

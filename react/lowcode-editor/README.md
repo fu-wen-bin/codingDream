@@ -47,15 +47,12 @@ npm install zustand --save
     - 存放整个`json`对象(`components`数组)。
     - 定义了往该`json`对象中**添加**、**移除**和**更新**子对象(组件)内部属性的函数
 
-
 2. 创建了`componentsConfigStore`仓库
     - 存放`json`组件树中**每一类组件的配置文件**(`componentsConfig`对象)，与`componentsStore`仓库中的`components`形成映射关系
     - 定义了注册组件的函数
 
-
 3. 定义了 `renderComponents`函数用来将整个`json`渲染成真实的HTML结构
     - 借助了`React.createElement`函数来实现递归渲染
-
 
 4. 实现物料区的组件拖拽到画布区
 
@@ -72,19 +69,15 @@ npm install zustand --save
     - 将一个组件拖拽到画布区时，触发`onDrop`事件，将该组件添加到`json`树中进行渲染
         - 借助 react-dnd 的 `useDrop` 钩子函数来实现接收组件
 
-
 2. 抽离useDrop代码，封装成一个hook
-
 
 3. 中间画布展示好组件后，我们封装了一个HoverMask组件
     - 实现了用户鼠标移入哪一个组件上，该组件被选中的效果
     - 接收一个组件类名，通过js获取到该组件容器的集合属性，动态地将mask容器也设置成相同的大小并覆盖在组件容器上
 
-
 4. 点击展示组件的编辑框，并可以移除组件 -- 和hover不同，点击需要在右侧展示对对应组件的属性编辑框
     - `selectedMask`：当用户点击画布中的某个组件时，我们实现跟hoverMask一样的蒙版效果，并提供删除按钮
     - 点击后的蒙版和鼠标悬浮的蒙版会产生重叠，需要做一个取舍
-
 
 5. 点击画布区组件，实现右侧`setting`区展示属性编辑框
     - 往每一个组件对象中间增加了一个`setter[ ]`属性数组，存放该组件所有可以编辑的属性
