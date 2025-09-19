@@ -80,7 +80,7 @@
 
 - 2.0版本剩余的问题都是TCP带来的，而TCP过于底层，改动成本过大
 
-- 打造了新的传输层协议QUIC
+- 打造了新的传输层协议QUIC（Quick UDP Internet Connection）
     1. 基于UDP协议
     2. 多路复用
     3. 服务端推送

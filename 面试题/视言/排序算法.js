@@ -53,6 +53,24 @@ console.log('插入排序：', insertSort(test)) // [2, 3, 4, 5, 8]
 
 // 归并排序
 function mergeSort (array) {
+  if (array.length <= 1) return array // 递归终止条件
+  const mid = Math.floor(array.length / 2) // 找到中间索引
+  const left = mergeSort(array.slice(0, mid)) // 递归排序左半部分
+  const right = mergeSort(array.slice(mid)) // 递归排序右半部分
+  // 合并两个有序数组
+  function merge (left, right) {
+    const result = []
+    let i = 0
+    let j = 0
+    while (i < left.length && j < right.length) {
+      if (left[i] < right[j]) {
+        result.push(left[i])
+        i++
+      }
+    }
+  }
+
+  return merge(left, right) // 合并两个有序数组
 
 }
 
@@ -60,5 +78,20 @@ console.log('归并排序：', mergeSort(test)) // [2, 3, 4, 5, 8]
 
 // 快速排序
 function quickSort (array) {
-
+  const result = array
+  if (result.length <= 1) return result // 递归终止条件
+  const pivot = result[0] // 选择基准值
+  const left = [] // 小于基准值的子数组
+  const right = [] // 大于等于基准值的子数组
+  for (let i = 1; i < result.length; i++) {
+    if (result[i] < pivot) {
+      left.push(result[i])
+    } else {
+      right.push(result[i])
+    }
+  }
+  // 递归排序子数组并合并结果
+  return [...quickSort(left), pivot, ...quickSort(right)]
 }
+
+console.log('快速排序：', quickSort(test)) // [2, 3, 4, 5, 8]
