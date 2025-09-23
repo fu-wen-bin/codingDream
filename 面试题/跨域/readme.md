@@ -1,3 +1,7 @@
+# 跨域
+
+跨域（Cross-Origin）是指浏览器出于安全原因，限制了一个源（协议、域名、端口）的网页请求另一个源的资源。
+
 # 同源策略
 
 - https://&ensp;&ensp;&ensp;&ensp;192.168.xx.xx&ensp;&ensp;&ensp;&ensp;:XXXX&ensp;&ensp;&ensp;&ensp;/home
