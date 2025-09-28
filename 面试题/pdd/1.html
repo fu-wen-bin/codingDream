@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input type="text" id="search-input">
+
+  <script>
+    const input = document.getElementById('search-input')
+
+    async function searchGoods (keyword) {
+      // 模拟接口调用
+      await new Promise(resolve => setTimeout(resolve, 300))
+      return [keyword + '商品1', keyword + '商品2']
+    }
+
+    const hotKeys = ['iPhone', 'iPad', '华为', '小米']
+
+    function createSearchManager () {
+      let requestId = 0
+      let currentId = 0
+      let timer = null
+
+      return function (keyword) {
+        if (keyword == '') {
+          clearTimeout(timer)
+          console.log('重新搜索')
+          return
+        }
+        // 请补充代码
+        // 1. 匹配字典
+        let str = '猜你想搜：'
+        const res = hotKeys.filter((item) => {
+          item = item.toLowerCase()
+          keyword = keyword.toLowerCase()
+          return item.includes(keyword)
+        })
+        if (res.length) {
+          str += res.join(',')
+          console.log(str)
+        }
+
+        // 2.
+        clearTimeout(timer)
+        timer = setTimeout(() => {
+          if (currentId === requestId) {
+            currentId++
+            return searchGoods(keyword).then(res => {
+              requestId++
+              console.log(res)
+            })
+          }
+        }, 500)
+
+      }
+    }
+
+    const searchManager = createSearchManager()
+
+    input.addEventListener('input', handle)
+
+    async function handle (e) {
+      const keyword = e.target.value
+      await searchManager(keyword)
+    }
+
+  </script>
+</body>
+
+</html>
