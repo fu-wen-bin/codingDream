@@ -1,28 +1,29 @@
-const fs = require('fs')
-const parser = require('@babel/parser')
-const traverse = require('@babel/traverse').default
-const path = require('path')
-const babel = require('@babel/core')
+const fs = require('fs');
+const parser = require('@babel/parser');
+const traverse = require('@babel/traverse').default;
+const path = require('path');
+const babel = require('@babel/core');
+
 
 const getModuleInfo = (file) => {
   const body = fs.readFileSync(file, 'utf-8')
   const ast = parser.parse(body, {
-    sourceType: 'module', // 告诉 babel 我们的代码是 ES 模块
-  })
+    sourceType: "module", // 告诉 babel 我们的代码是 ES 模块
+  });
 
   // 遍历 AST 语法树，收集依赖
   const deps = {}
   traverse(ast, {
-    ImportDeclaration ({ node }) {
+    ImportDeclaration({ node }) {
       const dirname = path.dirname(file)
       const abspath = './' + path.join(dirname, node.source.value)
       deps[node.source.value] = abspath
-    },
+    }
   })
 
   // 根据 ast 生成低版本的 js
   const { code } = babel.transformFromAst(ast, null, {
-    presets: ['@babel/preset-env'],
+    presets: ['@babel/preset-env'],  
   })
 
   const moduleInfo = {
@@ -80,10 +81,12 @@ const bundle = (file) => {
           })(${depsGraph});`
 }
 
-const content = bundle('./src/index.js')
+
+const content = bundle('./src/index.js'); 
 // console.log(content);
 fs.mkdirSync('./dist')
 fs.writeFileSync('./dist/bundle.js', content)
+
 
 // "use strict"
 // var _add = _interopRequireDefault(require("./add.js"));
@@ -94,6 +97,8 @@ fs.writeFileSync('./dist/bundle.js', content)
 // console.log(sum);
 // console.log(diff);
 
+
+
 // "use strict";
 // Object.defineProperty(exports, "__esModule", {
 //   value: true
@@ -102,6 +107,7 @@ fs.writeFileSync('./dist/bundle.js', content)
 // var _default = exports["default"] = function _default(a, b) {
 //   return a + b;
 // }
+
 
 // (function(graph) {
 //             function require(file) {
@@ -115,7 +121,7 @@ fs.writeFileSync('./dist/bundle.js', content)
 //               (function(require, exports, code) {
 //                 eval(code)
 //               })(absRequire, exports, graph[file].code);
-
+              
 //               return exports
 //             }
 //             require("./src/index.js");
