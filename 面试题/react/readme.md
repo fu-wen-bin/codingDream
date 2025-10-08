@@ -25,21 +25,9 @@ memo + useMemo 缓存值，只有在值变化时才会重新渲染
 
 # 数据的不可变性
 
-this.state = {
-a: {
-b: 1
-}
-}
-this.state.a.b = 2
-this.setState(this.state)
+```this.state = { a: { b: 1 } } this.state.a.b = 2 this.setState(this.state)```
 
-const [state, setState] = useState({
-a: {
-b: 1
-}
-})
-state.a.b = 2
-setState(state)
+```const [state, setState] = useState({ a: { b: 1 } }) state.a.b = 2 setState(state)```
 
 1. 普通的 class 组件，只要 setState 调用了，就会重新渲染
 2. 继承 PureComponent 类的组件，会浅比较 props 和 state，如果没有变化，就不会重新渲染
@@ -51,18 +39,7 @@ setState(state)
 
 # 如何实现组件的缓存 keepalive
 
-```
-{
-  component: {
-    Home: {
-      instance: <Home />,
-      props: {
-        a: 1
-      }
-    }
-  }
-}
-```
+```{ component: { Home: { instance: , props: { a: 1 } } } }```
 
 react 执行过程中，会将组件编译成对象，组件之间的切换操作，其实就是 react 移除旧的组件对象，添加新的组件对象再渲染的行为。
 
