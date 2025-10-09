@@ -1,0 +1,18 @@
+{
+  "name": "rag_demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.14.0",
+  "dependencies": {
+    "@types/node": "^24.7.0",
+    "ollama": "^0.6.0",
+    "vectra": "^0.11.1"
+  }
+}
